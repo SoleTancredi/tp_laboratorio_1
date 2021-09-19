@@ -14,6 +14,8 @@
 #include <ctype.h>
 #include "BibliotecaCalculadora.h"
 // MI PAPI ES LO MAS
+//buuyguguyguyguy
+//oijoijiuihipu
 int main(void) {
 	int opcion;
     int primerOperando;
