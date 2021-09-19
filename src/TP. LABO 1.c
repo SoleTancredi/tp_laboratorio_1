@@ -10,6 +10,9 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdio_ext.h>
+#include <ctype.h>
+#include "BibliotecaCalculadora.h"
 
 int main(void) {
 	int opcion;
