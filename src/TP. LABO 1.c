@@ -13,9 +13,7 @@
 #include <stdio_ext.h>
 #include <ctype.h>
 #include "BibliotecaCalculadora.h"
-// MI PAPI ES LO MAS
-//buuyguguyguyguy
-//oijoijiuihipu
+
 int main(void) {
 	int opcion;
     int primerOperando;
@@ -24,50 +22,89 @@ int main(void) {
     int resultadoResta;
     float resultadoDiision;
     int resultadoMutiplicacion;
+    int flagPrimerOperando = 0;
+    int flagSegundoOperando = 0;
+    int flagCalculos = 0;
 
     do
     {
 
-		if(utn_getNumber(&opcion, "Ingrese el numero de la opcion deseada: "
-					"\n1.Ingresar el 1º operando.\n2. Ingresar el 2º operando.\n3.Calcular todas las operaciones\n"
-					"4. Informar resultados.\n5. Salir.\n","ERROR. Reingrese la opcion.\n", 1, 5, 2) == 0)
+		if(utn_getNumber(&opcion, "\nIngrese el numero de la opcion deseada: ""\n1.Ingresar el 1º operando."
+				"\n2. Ingresar el 2º operando.\n3.Calcular todas las operaciones\n""4. Informar resultados."
+						"\n5. Salir.\n","ERROR. Reingrese la opcion.\n", 1, 5, 2) == 0)
 			{
 				switch(opcion)
 				{
 					case 1:
-						if(utn_getNumber(&primerOperando, "Ha elegido la opcion 1. Ingrese el primer operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", 0, 1000000, 2) == 0)
+
+						if(utn_getNumber(&primerOperando, "\nIngrese el primer operando: "
+								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValueINT, MaxValueINT, 2) == 0)
 						{
 							printf("\nUsted ha ingresado el numero %d\n", primerOperando);
+							flagPrimerOperando = 1;
 						}
 						break;
+
 					case 2:
-						if(utn_getNumber(&segundoOperando, "Ha elegido la opcion 2. Ingrese el segundo operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", 0, 1000000, 2) == 0)
+
+						if(utn_getNumber(&segundoOperando, "\nIngrese el segundo operando: "
+								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValueINT, MaxValueINT, 2) == 0)
 						{
 							printf("\nUsted ha ingresado el numero %d\n", segundoOperando);
+							flagSegundoOperando = 1;
 						}
 						break;
-					case 3:
-						/// suponete case 3 tenes funcSuma funDivison funResta
-						printf("Usted ha elegido la opcion 3. Se calcularan todas las operaciones.\n");
 
-						utn_sumar(primerOperando, segundoOperando, &resultadoSuma);
-						utn_restar(primerOperando, segundoOperando, &resultadoResta);
-						utn_dividir(primerOperando, segundoOperando, &resultadoDiision);
-						utn_multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion);
+					case 3:
+
+						if(flagPrimerOperando == 1 && flagSegundoOperando == 1)
+						{
+
+							if(utn_sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
+									utn_restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
+									utn_multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0)
+							{
+								if(utn_dividir(primerOperando, segundoOperando, &resultadoDiision) == 0)
+								{
+									printf("\nYa se han realizado todas las operaciones.\n");
+									flagCalculos = 1;
+								}
+								else
+								{
+									printf("\nVuelva a ingresar los operandos.\n");
+									flagCalculos = 0;
+								}
+							}
+							else
+							{
+								printf("\nNo se han podido realizar las operaciones. Ingrese correctamente los operandos.\n");
+							}
+						}
 						break;
+
 					case 4:
-						/// MOSTRAR CALCULOS REALIZADOS
-						printf("Usted ha elegido la opcion nº 4. Se le mostrara un informe de los resultados obtenidos en las operaciones realizadas.\n"
-								"RESULTADO DE LA SUMA : %d\n RESULTADO RESTA: %d\n RSULTADO DIVISION: %.2f\n RESULTADO MULTIPLICACION: %d\n",
-								resultadoSuma, resultadoResta, resultadoDiision, resultadoMutiplicacion);
+
+						if(flagCalculos == 1)
+						{
+							printf("\nLos resultados de las operaciones realizadas son:\n "
+							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO DIVISION: %.2f \nRESULTADO MULTIPLICACION: %d\n",
+							resultadoSuma, resultadoResta, resultadoDiision, resultadoMutiplicacion);
+						}
+						else
+						{
+							printf("\nNo se puede mostrar el informe de resultados, sin antes realizar los Calculos de la opcion 3.\n");
+						}
+
 						break;
-					case 5: // TE vas
-						printf("Usted ha elegido la opcion nº 5 SALIR DEL PROGRAMA.");
+
+					case 5:
+
+						printf("FIN DEL PROGRAMA.");
 						break;
+
 					default:
-						printf("Ingresa una opcion correcta papafrita. Te queda 1 intento.");
+
+						printf("\nIngresa una opcion correcta papafrita. Te queda 1 intento.\n");
 						break;
 					}
 

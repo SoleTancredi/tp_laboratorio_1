@@ -15,7 +15,7 @@
 static int myGets(char* cadena, int longitud);
 static int esNumerica(char* cadena);
 static int getInt(int* pResultado);
-static int esLetra(char* cadena);
+
 
 /**
  * @fn int myGets(char*, int)
@@ -122,3 +122,73 @@ int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	 }
 	return retorno;
 }
+
+int utn_sumar(int primerNumero, int segundoNumero, int* pResultado)
+{
+	int retorno = -1;
+	int resultado;
+
+	if(pResultado != NULL)
+	{
+		resultado = primerNumero + segundoNumero;
+		retorno = 0;
+	}
+
+	*pResultado = resultado;
+
+	return retorno;
+}
+
+int utn_restar(int primerNumero, int segundoNumero, int* pResultado)
+{
+	int retorno = -1;
+	int resultado;
+
+	if(pResultado != NULL)
+	{
+		resultado = primerNumero - segundoNumero;
+		retorno = 0;
+	}
+
+	*pResultado = resultado;
+
+	return retorno;
+}
+
+float utn_dividir(int primerNumero, int segundoNumero, float* pResultado)
+{
+	int retorno = -1;
+	int resultado;
+
+	if(pResultado != NULL && segundoNumero != 0)
+	{
+		resultado = (float)primerNumero / segundoNumero;
+		retorno = 0;
+	}
+	else
+	{
+		printf("\nNo pudo realizarse la division. El denominador NO puede ser 0.\n");
+		retorno = -1;
+	}
+
+	*pResultado = resultado;
+
+	return retorno;
+}
+
+int utn_multiplicar(int primerNumero, int segundoNumero, int* pResultado)
+{
+	int retorno = -1;
+	int resultado;
+
+	if(pResultado != NULL)
+	{
+		resultado = primerNumero * segundoNumero;
+		retorno = 0;
+	}
+
+	*pResultado = resultado;
+
+	return retorno;
+}
+
