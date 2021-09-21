@@ -58,7 +58,7 @@ int main(void) {
 						}
 						else
 						{
-							puts("\nAntes ingrese primer operando ");
+							puts("\nAntes ingrese el primer operando.");
 						}
 						break;
 
