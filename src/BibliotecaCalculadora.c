@@ -155,20 +155,15 @@ int restar(int primerNumero, int segundoNumero, int* pResultado)
 	return retorno;
 }
 
-float dividir(int primerNumero, int segundoNumero, float* pResultado)
+int dividir(int primerNumero, int segundoNumero, float* pResultado)
 {
 	int retorno = -1;
-	int resultado;
+	float resultado;
 
 	if(pResultado != NULL && segundoNumero != 0)
 	{
 		resultado = (float)primerNumero / segundoNumero;
 		retorno = 0;
-	}
-	else
-	{
-		printf("\nNo pudo realizarse la division. El denominador NO puede ser 0.\n");
-		retorno = -1;
 	}
 
 	*pResultado = resultado;
@@ -192,27 +187,44 @@ int multiplicar(int primerNumero, int segundoNumero, int* pResultado)
 	return retorno;
 }
 
-int factorial(int primerNumero, long int* pResultado)
+long int factorial(int primerNumero,long int* pResultado)// te llega un 4
 {
 	int retorno = -1;
-	long int resultado;
+	long int auxPResultado;
 
-	if(pResultado != NULL)
+	if( pResultado!=NULL )
 	{
+		retorno = 0;
 		if(primerNumero == 0)
 		{
-			resultado = 1;
+			auxPResultado = 1;
 		}
 		else
 		{
-			resultado = primerNumero * factorial (primerNumero -1);
+			factorial(primerNumero -1, &auxPResultado);// 4 -1 = 3 entonces factorial de 3 = 6
+			auxPResultado = primerNumero * auxPResultado;
 		}
-
-		retorno = 0;
+		*pResultado = auxPResultado ;
 	}
-
-	*pResultado = resultado;
-
 	return retorno;
 }
+long int factorialConFor(int numero)
+{
+	long int Resultado;
+	for(int i=1;i<numero;i++)
+	{
+		Resultado = i * (i+1);
+	}
 
+	return Resultado;
+}
+long int factorialConWhile(int numero)
+{
+	long int Resultado;
+
+	while(numero>0)
+	{
+		Resultado = numero * numero -1;
+	}
+	return Resultado;
+}

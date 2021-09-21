@@ -22,7 +22,9 @@ int main(void) {
     int resultadoResta;
     float resultadoDivision;
     int resultadoMutiplicacion;
-    long int resultadoFactorial;
+    int retornoDivision;
+    long int resultadoFactorialUno=0;
+    long int resultadoFactorialDos=0;
     int flagPrimerOperando = 0;
     int flagSegundoOperando = 0;
     int flagCalculos = 0;
@@ -66,20 +68,13 @@ int main(void) {
 						{
 
 							if(sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
-									restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
-									multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0 &&
-									factorial(primerOperando, resultadoFactorial) == 0)
+								restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
+								multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0 &&
+								factorial(primerOperando,&resultadoFactorialUno) == 0 && factorial(segundoOperando, &resultadoFactorialDos) == 0)
 							{
-								if(dividir(primerOperando, segundoOperando, &resultadoDivision) == 0)
-								{
-									printf("\nYa se han realizado todas las operaciones.\n");
-									flagCalculos = 1;
-								}
-								else
-								{
-									printf("\nVuelva a ingresar los operandos.\n");
-									flagCalculos = 0;
-								}
+								retornoDivision = dividir(primerOperando, segundoOperando, &resultadoDivision);
+
+								flagCalculos = 1;
 							}
 						}
 						else
@@ -94,9 +89,17 @@ int main(void) {
 						if(flagCalculos == 1)
 						{
 							printf("\nLos resultados de las operaciones realizadas son:\n "
-							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO DIVISION: %.2f \nRESULTADO MULTIPLICACION: %d \n"
-							"RESULTADO DEL FACTORIAL DEL PRIMER OPERANDO: %d\n",
-							resultadoSuma, resultadoResta, resultadoDivision, resultadoMutiplicacion, resultadoFactorial);
+							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO MULTIPLICACION: %d \n"
+							"RESULTADO DEL FACTORIAL DEL PRIMER OPERANDO: %ld \nRESULTADO DEL FACTORIAL DEL SEGUNDO OPERANDO: %ld \n",
+							resultadoSuma, resultadoResta, resultadoMutiplicacion, resultadoFactorialUno, resultadoFactorialDos);
+							if(retornoDivision == 0)
+							{
+								printf("RESULTADO DE LA DIVISION: %.2f\n", resultadoDivision);
+							}
+							else
+							{
+								printf("RESULTADO DE LA DIVISION: No es posible dividir por 0.\n");
+							}
 						}
 						else
 						{
