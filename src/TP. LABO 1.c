@@ -20,8 +20,9 @@ int main(void) {
     int segundoOperando;
     int resultadoSuma;
     int resultadoResta;
-    float resultadoDiision;
+    float resultadoDivision;
     int resultadoMutiplicacion;
+    long int resultadoFactorial;
     int flagPrimerOperando = 0;
     int flagSegundoOperando = 0;
     int flagCalculos = 0;
@@ -53,6 +54,10 @@ int main(void) {
 							printf("\nUsted ha ingresado el numero %d\n", segundoOperando);
 							flagSegundoOperando = 1;
 						}
+						else
+						{
+							puts("\nAntes ingrese primer operando ");
+						}
 						break;
 
 					case 3:
@@ -60,11 +65,12 @@ int main(void) {
 						if(flagPrimerOperando == 1 && flagSegundoOperando == 1)
 						{
 
-							if(utn_sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
-									utn_restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
-									utn_multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0)
+							if(sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
+									restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
+									multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0 &&
+									factorial(primerOperando, resultadoFactorial) == 0)
 							{
-								if(utn_dividir(primerOperando, segundoOperando, &resultadoDiision) == 0)
+								if(dividir(primerOperando, segundoOperando, &resultadoDivision) == 0)
 								{
 									printf("\nYa se han realizado todas las operaciones.\n");
 									flagCalculos = 1;
@@ -75,11 +81,12 @@ int main(void) {
 									flagCalculos = 0;
 								}
 							}
-							else
-							{
-								printf("\nNo se han podido realizar las operaciones. Ingrese correctamente los operandos.\n");
-							}
 						}
+						else
+						{
+							printf("\nNo se han podido realizar las operaciones. Ingrese correctamente los operandos.\n");
+						}
+
 						break;
 
 					case 4:
@@ -87,8 +94,9 @@ int main(void) {
 						if(flagCalculos == 1)
 						{
 							printf("\nLos resultados de las operaciones realizadas son:\n "
-							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO DIVISION: %.2f \nRESULTADO MULTIPLICACION: %d\n",
-							resultadoSuma, resultadoResta, resultadoDiision, resultadoMutiplicacion);
+							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO DIVISION: %.2f \nRESULTADO MULTIPLICACION: %d \n"
+							"RESULTADO DEL FACTORIAL DEL PRIMER OPERANDO: %d\n",
+							resultadoSuma, resultadoResta, resultadoDivision, resultadoMutiplicacion, resultadoFactorial);
 						}
 						else
 						{

@@ -11,9 +11,10 @@
 #define MinValueINT -2147483647
 
 int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos);
-int utn_multiplicar(int primerNumero, int segundoNumero, int* pResultado);
-float utn_dividir(int primerNumero, int segundoNumero, float* pResultado);
-int utn_restar(int primerNumero, int segundoNumero, int* pResultado);
-int utn_sumar(int primerNumero, int segundoNumero, int* pResultado);
+int multiplicar(int primerNumero, int segundoNumero, int* pResultado);
+float dividir(int primerNumero, int segundoNumero, float* pResultado);
+int restar(int primerNumero, int segundoNumero, int* pResultado);
+int sumar(int primerNumero, int segundoNumero, int* pResultado);
+int factorial(int primerNumero, long int* pResultado);
 
 #endif /* BIBLIOTECACALCULADORA_H_ */

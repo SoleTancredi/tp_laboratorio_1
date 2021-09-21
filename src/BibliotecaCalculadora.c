@@ -123,7 +123,7 @@ int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	return retorno;
 }
 
-int utn_sumar(int primerNumero, int segundoNumero, int* pResultado)
+int sumar(int primerNumero, int segundoNumero, int* pResultado)
 {
 	int retorno = -1;
 	int resultado;
@@ -139,7 +139,7 @@ int utn_sumar(int primerNumero, int segundoNumero, int* pResultado)
 	return retorno;
 }
 
-int utn_restar(int primerNumero, int segundoNumero, int* pResultado)
+int restar(int primerNumero, int segundoNumero, int* pResultado)
 {
 	int retorno = -1;
 	int resultado;
@@ -155,7 +155,7 @@ int utn_restar(int primerNumero, int segundoNumero, int* pResultado)
 	return retorno;
 }
 
-float utn_dividir(int primerNumero, int segundoNumero, float* pResultado)
+float dividir(int primerNumero, int segundoNumero, float* pResultado)
 {
 	int retorno = -1;
 	int resultado;
@@ -176,7 +176,7 @@ float utn_dividir(int primerNumero, int segundoNumero, float* pResultado)
 	return retorno;
 }
 
-int utn_multiplicar(int primerNumero, int segundoNumero, int* pResultado)
+int multiplicar(int primerNumero, int segundoNumero, int* pResultado)
 {
 	int retorno = -1;
 	int resultado;
@@ -184,6 +184,30 @@ int utn_multiplicar(int primerNumero, int segundoNumero, int* pResultado)
 	if(pResultado != NULL)
 	{
 		resultado = primerNumero * segundoNumero;
+		retorno = 0;
+	}
+
+	*pResultado = resultado;
+
+	return retorno;
+}
+
+int factorial(int primerNumero, long int* pResultado)
+{
+	int retorno = -1;
+	long int resultado;
+
+	if(pResultado != NULL)
+	{
+		if(primerNumero == 0)
+		{
+			resultado = 1;
+		}
+		else
+		{
+			resultado = primerNumero * factorial (primerNumero -1);
+		}
+
 		retorno = 0;
 	}
 
