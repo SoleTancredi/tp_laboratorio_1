@@ -12,6 +12,7 @@
 #include <stdlib.h>
 #include <stdio_ext.h>
 #include <ctype.h>
+#include "BibliotecaUtn2021.h"
 #include "BibliotecaCalculadora.h"
 
 int main(void) {
