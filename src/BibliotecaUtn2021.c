@@ -19,12 +19,12 @@ static int esLetra(char* cadena);
 
 /**
  * @fn int myGets(char*, int)
- * @brief toma la medida del string con la funcion strlen y le resta un lugar para posicionarse en el \n donde lo pisa
- * y alli escribe un "\0".
+ * @brief toma la medida del string con la funcion strlen y le resta un lugar para posicionarse en el \n
+ * donde lo pisa y alli escribe un "\0".
  *
  * @param cadena
  * @param longitud
- * @return si todo salio bien o no
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
  */
 static int myGets(char* cadena, int longitud)
 {
@@ -48,12 +48,12 @@ static int myGets(char* cadena, int longitud)
 
 /**
  * @fn int esNumerica(char*)
- * @brief se encarga de recorrer el array hasta el \0 y verifica posicion a posicion del array verificando
- * que lo que contenga sea un numero. En caso de que en la posicion 0 halla un signo '-' l respeta ya que
+ * @brief se encarga de recorrer el array hasta el \0 y verifica posicion a posicion
+ * que lo que contenga sea un numero. En caso de que en la posicion 0 halla un signo '-' se respeta ya que
  * seria un numero negativo.
  *
  * @param cadena
- * @return si todo salio bien o no
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
  */
 
 static int esNumerica(char* cadena)
@@ -79,10 +79,10 @@ static int esNumerica(char* cadena)
 }
 /**
  * @fn int getInt(int*)
- * @brief toma el array ingresado y si al
+ * @brief mediante la funcion atoi se encarga de convertir la cadena a numeros enteros.
  *
  * @param pResultado
- * @return si todo salio bien o no
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
  */
 static int getInt(int* pResultado)
 {
@@ -96,6 +96,14 @@ static int getInt(int* pResultado)
 	}
 	return retorno;
 }
+
+/**
+ * @fn int esLetra(char*)
+ * @brief recorre el array verificado que en cada una de sus posiciones halla un caracter, guiandose por el codigo ASCII.
+ *
+ * @param cadena
+ * @return-1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 
 static int esLetra(char* cadena)
 {
@@ -118,6 +126,20 @@ static int esLetra(char* cadena)
 	}
 	return retorno;
 }
+
+/**
+ * @fn int utn_getNumber(int*, char*, char*, int, int, int)
+ * @brief pide un numero entero. Valida lo ingresado utilizando las funciones estaticas, mygets, esNumerica, getInt
+ * posee maximos y minimo, y cantidad de reintentos en caso de que el usuario se confunda en el ingreso.
+ *
+ * @param pResultado
+ * @param mensaje
+ * @param mensajeError
+ * @param minimo
+ * @param maximo
+ * @param reintentos
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 
 int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
@@ -145,6 +167,20 @@ int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo
 	return retorno;
 }
 
+/**
+ * @fn int utn_getNumberFloat(float*, char*, char*, float, float, int)
+ * @brief pide un numero flotante. Valida lo ingresado utilizando las funciones estaticas, mygets, esNumerica,
+ * posee maximos y minimo, y cantidad de reintentos en caso de que el usuario se confunda en el ingreso.
+ *
+ * @param pResultado
+ * @param mensaje
+ * @param mensajeError
+ * @param minimo
+ * @param maximo
+ * @param reintentos
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
+
 int utn_getNumberFloat(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos)
 {
 	int retorno = -1;
@@ -170,6 +206,18 @@ int utn_getNumberFloat(float* pResultado, char* mensaje, char* mensajeError, flo
 	 }
 	return retorno;
 }
+
+/**
+ * @fn int utn_getCharacter(char*, char[], char*, int)
+ * @brief pide un carcater. Valida lo ingresado utilizando las funciones estaticas, mygets, esLetra,
+ * posee maximos y minimo, y cantidad de reintentos en caso de que el usuario se confunda en el ingreso.
+ *
+ * @param pResultado
+ * @param mensaje
+ * @param mensajeError
+ * @param reintentos
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 
 int utn_getCharacter(char* pResultado, char mensaje[] , char* mensajeError, int reintentos)
 {
@@ -198,70 +246,19 @@ int utn_getCharacter(char* pResultado, char mensaje[] , char* mensajeError, int 
 	return retorno;
 }
 
-int utn_sumar(int primerNumero, int segundoNumero, int* pResultado)
-{
-	int retorno = -1;
-	int resultado;
-
-	if(pResultado != NULL)
-	{
-		resultado = primerNumero + segundoNumero;
-		retorno = 0;
-	}
-
-	*pResultado = resultado;
-
-	return retorno;
-}
-
-int utn_restar(int primerNumero, int segundoNumero, int* pResultado)
-{
-	int retorno = -1;
-	int resultado;
-
-	if(pResultado != NULL)
-	{
-		resultado = primerNumero - segundoNumero;
-		retorno = 0;
-	}
-
-	*pResultado = resultado;
-
-	return retorno;
-}
-
-float utn_dividir(int primerNumero, int segundoNumero, float* pResultado)
-{
-	int retorno = -1;
-	int resultado;
-
-	if(pResultado != NULL)
-	{
-		resultado = (float)primerNumero / segundoNumero;
-		retorno = 0;
-	}
-
-	*pResultado = resultado;
-
-	return retorno;
-}
-
-int utn_multiplicar(int primerNumero, int segundoNumero, int* pResultado)
-{
-	int retorno = -1;
-	int resultado;
-
-	if(pResultado != NULL)
-	{
-		resultado = primerNumero * segundoNumero;
-		retorno = 0;
-	}
-
-	*pResultado = resultado;
-
-	return retorno;
-}
-
+/**
+ * @fn int utn_nombreOapellido(char*, char*, char*, int, int)
+ * @brief pide el ingreso de un string (nombres o apellidos), utiliza funciones myGets y esLetra.
+ * con la funciones toUpper deja en mayuscula la primer letra del string y luego con toLower deja en minuscula
+ * el resto de la cadena.
+ *
+ * @param string
+ * @param mensaje
+ * @param mensajeError
+ * @param tam
+ * @param reintentos
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 int utn_nombreOapellido(char* string, char* mensaje, char* mensajeError, int tam, int reintentos)
 {
 	int retorno = -1;
@@ -313,6 +310,16 @@ int utn_nombreOapellido(char* string, char* mensaje, char* mensajeError, int tam
 
 	return retorno;
 }
+
+/**
+ * @fn int utn_mostrarNumeros(int*, char*, int)
+ * @brief recorre el array, mostrando los numeros que se le ingresaron.
+ *
+ * @param array
+ * @param mensaje
+ * @param tam
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 int utn_mostrarNumeros(int* array, char* mensaje, int tam)
 {
 	int retorno = -1;
@@ -331,6 +338,20 @@ int utn_mostrarNumeros(int* array, char* mensaje, int tam)
 
 	return retorno;
 }
+
+/**
+ * @fn int utn_cargarArrayNumeros(int[], int, char*, char*, int, int, int)
+ * @brief carga el array con numeros enteros
+ *
+ * @param arrayNumeros
+ * @param tam
+ * @param mensaje
+ * @param mensajeError
+ * @param minimo
+ * @param maximo
+ * @param reintentos
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 
 int utn_cargarArrayNumeros(int arrayNumeros[], int tam, char* mensaje, char* mensajeError, int minimo, int maximo, int reintentos)
 {
@@ -369,6 +390,15 @@ int utn_cargarArrayNumeros(int arrayNumeros[], int tam, char* mensaje, char* men
 	return retorno;
 }
 
+/**
+ * @fn int utn_ordenarArrayCreciente(int*, int)
+ * @brief ordena el array denumeros de forma creciente (burbujeo).
+ *
+ * @param array
+ * @param tam
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
+
 int utn_ordenarArrayCreciente(int* array, int tam)
 {
 	int retorno = -1;
@@ -402,6 +432,15 @@ int utn_ordenarArrayCreciente(int* array, int tam)
 	}
 	return retorno;
 }
+
+/**
+ * @fn int utn_ordenarArrayDecreciente(int*, int)
+ * @brief ordena el array de numeros de anera decreciente (burbujeo).
+ *
+ * @param array
+ * @param tam
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 
 int utn_ordenarArrayDecreciente(int* array, int tam)
 {
@@ -437,34 +476,15 @@ int utn_ordenarArrayDecreciente(int* array, int tam)
 	return retorno;
 }
 
-int utn_numerosPositivos(int array[], int positivos[], int tam)
-{
-	int retorno = -1;
-	int indiceBuffer = 0;
-	int buffer[tam];
-	if(tam>0 && array!=NULL && positivos!=NULL)
-	{
-
-	}
-	return retorno;
-}
-
-int inicializacionArray(int array[], int tam)
-{
-	int retorno = -1;
-
-	if(array != NULL)
-	{
-		 for(int i = 0 ; i < 5 ; i++)
-		{
-			array[i] = 0;
-		}
-		retorno = 0;
-	}
-
-    return retorno;
-}
-
+/**
+ * @fn int utn_promedio(int, int, float*)
+ * @brief devuelve el promedio de dos datos numericos ingresados.
+ *
+ * @param numerador
+ * @param denominador
+ * @param pResultadoF
+ * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
+ */
 int utn_promedio(int numerador, int denominador, float* pResultadoF)
 {
 	 int retorno = -1;
