@@ -82,7 +82,7 @@ long int factorial(int primerNumero,long int* pResultado)
 	int retorno = -1;
 	long int auxPResultado;
 
-	if( pResultado!=NULL )
+	if( pResultado!=NULL && primerNumero > 0)
 	{
 		retorno = 0;
 		if(primerNumero == 0)
@@ -94,27 +94,9 @@ long int factorial(int primerNumero,long int* pResultado)
 			factorial(primerNumero -1, &auxPResultado);
 			auxPResultado = primerNumero * auxPResultado;
 		}
+
 		*pResultado = auxPResultado ;
 	}
 	return retorno;
 }
-long int factorialConFor(int numero)
-{
-	long int Resultado;
-	for(int i=1;i<numero;i++)
-	{
-		Resultado = i * (i+1);
-	}
 
-	return Resultado;
-}
-long int factorialConWhile(int numero)
-{
-	long int Resultado;
-
-	while(numero>0)
-	{
-		Resultado = numero * numero -1;
-	}
-	return Resultado;
-}

@@ -20,7 +20,13 @@ static int esFloat(char* cadena);
 static int getFloat(float* pResultadoF);
 static int ArrayIsEmpty(char* array);
 
-
+/**
+ * @fn int ArrayIsEmpty(char*)
+ * @brief tiene en cuenta el posible caso de que el usuario ingrese enter o espacio nada mas
+ *
+ * @param array
+ * @return retorna el resultado 0 si esta todo ok, -1 si el array esta vacio
+ */
 
 
 static int ArrayIsEmpty(char* array)
@@ -28,7 +34,17 @@ static int ArrayIsEmpty(char* array)
 	int resultado=-1;
 	if(array!= NULL && strlen(array)>1)
 	{
-		resultado=0;
+		for(int i = 0; i < sizeof(array); i++)
+		{
+			if(array[i] == ' ')
+			{
+				break;
+			}
+			else
+			{
+				resultado = 0;
+			}
+		}
 	}
 	return resultado;
 }
@@ -207,7 +223,6 @@ int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo
 		do
 		{
 			printf("%s",mensaje);
-			//scanf("%d",&bufferInt); //lo eliminamos, vamos a cambiar por una funcion para hacer GetNUmber mas robusta
 			if(getInt(&bufferInt) == 0 && bufferInt >= minimo && bufferInt <= maximo)
 			{
 				*pResultado = bufferInt;

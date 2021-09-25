@@ -15,7 +15,8 @@
 #include "BibliotecaUtn2021.h"
 #include "BibliotecaCalculadora.h"
 
-int main(void) {
+int main(void)
+{
 	int opcion;
     float primerOperando;
     float segundoOperando;
@@ -24,6 +25,8 @@ int main(void) {
     float resultadoDivision;
     float resultadoMutiplicacion;
     int retornoDivision;
+    int retornoPrimerFactorial;
+    int retornoSegundoFactorial;
     long int resultadoFactorialUno=0;
     long int resultadoFactorialDos=0;
     int flagPrimerOperando = 0;
@@ -48,7 +51,7 @@ int main(void) {
 					case 1:
 
 						if(utn_getNumberFloat(&primerOperando, "\nIngrese el primer operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValue, MaxValue, 2) == 0)
+								, "\nERROR. Reingrese el operando.\n", MinValue, MaxValue, 2) == 0)
 						{
 
 							printf("\nUsted ha ingresado el numero %.2f\n", primerOperando);
@@ -59,7 +62,7 @@ int main(void) {
 					case 2:
 
 						if(utn_getNumberFloat(&segundoOperando, "\nIngrese el segundo operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValue, MaxValue, 2) == 0)
+								, "\nERROR. Reingrese el operando.\n", MinValue, MaxValue, 2) == 0)
 						{
 							printf("\nUsted ha ingresado el numero %.2f\n", segundoOperando);
 							flagSegundoOperando = 1;
@@ -77,9 +80,10 @@ int main(void) {
 
 							if(sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
 								restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
-								multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0 &&
-								factorial((int)primerOperando,&resultadoFactorialUno) == 0 && factorial((int)segundoOperando, &resultadoFactorialDos) == 0)
+								multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0)
 							{
+								retornoPrimerFactorial = factorial((int)primerOperando,&resultadoFactorialUno);
+								retornoSegundoFactorial = factorial((int)segundoOperando,&resultadoFactorialDos);
 								retornoDivision = dividir(primerOperando, segundoOperando, &resultadoDivision);
                                 printf("\nSe han realizado todos los calculos.\n");
 								flagCalculos = 1;
@@ -97,9 +101,27 @@ int main(void) {
 						if(flagCalculos == 1)
 						{
 							printf("\nLos resultados de las operaciones realizadas son:\n "
-							"\nRESULTADO DE LA SUMA : %2.f \nRESULTADO RESTA: %.2f\nRESULTADO MULTIPLICACION: %2.f \n"
-							"RESULTADO DEL FACTORIAL DEL PRIMER OPERANDO: %ld \nRESULTADO DEL FACTORIAL DEL SEGUNDO OPERANDO: %ld \n",
-							resultadoSuma, resultadoResta, resultadoMutiplicacion, resultadoFactorialUno, resultadoFactorialDos);
+							"\nRESULTADO DE LA SUMA : %.2f \nRESULTADO RESTA: %.2f"
+							"\nRESULTADO MULTIPLICACION: %.2f\n", resultadoSuma, resultadoResta, resultadoMutiplicacion);
+
+							if(retornoPrimerFactorial == 0)
+							{
+								printf("FACTORIAL DEL PRIMER OPERANDO: %ld\n", resultadoFactorialUno);
+							}
+							else
+							{
+								printf("FACTORIAL DEL PRIMER OPERANDO: No fue posible calcular el factorial de un numero negativo\n");
+							}
+
+							if(retornoSegundoFactorial == 0)
+							{
+								printf("FACTORIAL DEL SEGUNDO OPERANDO: %ld\n", resultadoFactorialDos);
+							}
+							else
+							{
+								printf("FACTORIAL DEL PRIMER OPERANDO: No fue posible calcular el factorial de un numero negativo\n");
+							}
+
 							if(retornoDivision == 0)
 							{
 								printf("RESULTADO DE LA DIVISION: %.2f\n", resultadoDivision);
