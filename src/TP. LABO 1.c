@@ -17,12 +17,12 @@
 
 int main(void) {
 	int opcion;
-    int primerOperando;
-    int segundoOperando;
-    int resultadoSuma;
-    int resultadoResta;
+    float primerOperando;
+    float segundoOperando;
+    float resultadoSuma;
+    float resultadoResta;
     float resultadoDivision;
-    int resultadoMutiplicacion;
+    float resultadoMutiplicacion;
     int retornoDivision;
     long int resultadoFactorialUno=0;
     long int resultadoFactorialDos=0;
@@ -30,31 +30,38 @@ int main(void) {
     int flagSegundoOperando = 0;
     int flagCalculos = 0;
 
+
     do
     {
+    	printf("\n***** CALCULADORA *****\n");
 
-		if(utn_getNumber(&opcion, "\nIngrese el numero de la opcion deseada: ""\n1.Ingresar el 1º operando."
-				"\n2. Ingresar el 2º operando.\n3.Calcular todas las operaciones\n""4. Informar resultados."
-						"\n5. Salir.\n","ERROR. Reingrese la opcion.\n", 1, 5, 2) == 0)
+		if(utn_getNumber(&opcion, "\nIngrese el numero de la opcion deseada: \n"
+				"\n1. Ingresar el 1º operando."
+				"\n2. Ingresar el 2º operando."
+				"\n3. Calcular todas las operaciones"
+				"\n4. Informar resultados."
+				"\n5. Salir.\n",
+				"ERROR. Reingrese la opcion.\n", 1, 5, 2) == 0)
 			{
 				switch(opcion)
 				{
 					case 1:
 
-						if(utn_getNumber(&primerOperando, "\nIngrese el primer operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValueINT, MaxValueINT, 2) == 0)
+						if(utn_getNumberFloat(&primerOperando, "\nIngrese el primer operando: "
+								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValue, MaxValue, 2) == 0)
 						{
-							printf("\nUsted ha ingresado el numero %d\n", primerOperando);
+
+							printf("\nUsted ha ingresado el numero %.2f\n", primerOperando);
 							flagPrimerOperando = 1;
 						}
 						break;
 
 					case 2:
 
-						if(utn_getNumber(&segundoOperando, "\nIngrese el segundo operando: "
-								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValueINT, MaxValueINT, 2) == 0)
+						if(utn_getNumberFloat(&segundoOperando, "\nIngrese el segundo operando: "
+								, "ERROR. Reingrese el operando, el mismo no puede ser negativo.", MinValue, MaxValue, 2) == 0)
 						{
-							printf("\nUsted ha ingresado el numero %d\n", segundoOperando);
+							printf("\nUsted ha ingresado el numero %.2f\n", segundoOperando);
 							flagSegundoOperando = 1;
 						}
 						else
@@ -71,10 +78,10 @@ int main(void) {
 							if(sumar(primerOperando, segundoOperando, &resultadoSuma) == 0 &&
 								restar(primerOperando, segundoOperando, &resultadoResta) == 0 &&
 								multiplicar(primerOperando, segundoOperando, &resultadoMutiplicacion) == 0 &&
-								factorial(primerOperando,&resultadoFactorialUno) == 0 && factorial(segundoOperando, &resultadoFactorialDos) == 0)
+								factorial((int)primerOperando,&resultadoFactorialUno) == 0 && factorial((int)segundoOperando, &resultadoFactorialDos) == 0)
 							{
 								retornoDivision = dividir(primerOperando, segundoOperando, &resultadoDivision);
-
+                                printf("\nSe han realizado todos los calculos.\n");
 								flagCalculos = 1;
 							}
 						}
@@ -90,7 +97,7 @@ int main(void) {
 						if(flagCalculos == 1)
 						{
 							printf("\nLos resultados de las operaciones realizadas son:\n "
-							"\nRESULTADO DE LA SUMA : %d \nRESULTADO RESTA: %d\nRESULTADO MULTIPLICACION: %d \n"
+							"\nRESULTADO DE LA SUMA : %2.f \nRESULTADO RESTA: %.2f\nRESULTADO MULTIPLICACION: %2.f \n"
 							"RESULTADO DEL FACTORIAL DEL PRIMER OPERANDO: %ld \nRESULTADO DEL FACTORIAL DEL SEGUNDO OPERANDO: %ld \n",
 							resultadoSuma, resultadoResta, resultadoMutiplicacion, resultadoFactorialUno, resultadoFactorialDos);
 							if(retornoDivision == 0)

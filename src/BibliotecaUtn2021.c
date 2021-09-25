@@ -16,7 +16,22 @@ static int myGets(char* cadena, int longitud);
 static int esNumerica(char* cadena);
 static int getInt(int* pResultado);
 static int esLetra(char* cadena);
+static int esFloat(char* cadena);
+static int getFloat(float* pResultadoF);
+static int ArrayIsEmpty(char* array);
 
+
+
+
+static int ArrayIsEmpty(char* array)
+{
+	int resultado=-1;
+	if(array!= NULL && strlen(array)>1)
+	{
+		resultado=0;
+	}
+	return resultado;
+}
 /**
  * @fn int myGets(char*, int)
  * @brief toma la medida del string con la funcion strlen y le resta un lugar para posicionarse en el \n
@@ -36,13 +51,13 @@ static int myGets(char* cadena, int longitud)
 		__fpurge(stdin);
 		fgets(bufferCadena,longitud, stdin);
 
-		bufferCadena[strlen(bufferCadena)-1]= '\0' ;
-
-		retorno = 0;
-
-		strcpy(cadena, bufferCadena);
+		if(ArrayIsEmpty(bufferCadena)==0)
+		{
+			bufferCadena[strlen(bufferCadena)-1]= '\0' ;
+			strcpy(cadena, bufferCadena);
+			retorno = 0;
+		}
 	}
-
 	 return retorno;
 }
 
@@ -97,6 +112,49 @@ static int getInt(int* pResultado)
 	return retorno;
 }
 
+static int esFloat(char* cadena)
+{
+	int retorno = 1;
+	int i = 0;
+	int contadorPuntos = 0;
+
+	if (cadena != NULL && strlen(cadena) > 0)
+	{
+	     for(  ; cadena[i] != '\0'; i++)
+	     {
+			if(i == 0 && (cadena[i] == '-' || cadena[i] == '+'))
+			{
+				continue;
+			}
+
+			if(cadena[i] == '.')
+			{
+				 contadorPuntos++;
+			}
+
+			if((cadena[i] > '9'||cadena[i] < '0') && contadorPuntos > 1)
+			{
+				retorno = 0;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+
+static int getFloat(float* pResultadoF)
+{
+	int retorno=-1;
+	char buffer[4096];
+
+	if(pResultadoF != NULL && myGets(buffer,4096) == 0 && esFloat(buffer) == 1)
+	{
+		 retorno = 0;
+	    *pResultadoF = atof(buffer);
+	}
+	return retorno;
+}
+
 /**
  * @fn int esLetra(char*)
  * @brief recorre el array verificado que en cada una de sus posiciones halla un caracter, guiandose por el codigo ASCII.
@@ -118,7 +176,6 @@ static int esLetra(char* cadena)
 		}
 		else
 		{
-			//printf("\nentro ELSE valor -%d-", cadena[i]);
 			retorno = 0;
 			break;
 		}
@@ -180,20 +237,19 @@ int utn_getNumber(int* pResultado, char* mensaje, char* mensajeError, int minimo
  * @param reintentos
  * @return -1 si hubo errores o 0 en caso de que la funcion halla cumplido con su tarea
  */
-
-int utn_getNumberFloat(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos)
+int utn_getNumberFloat(float* pResultadoF, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos)
 {
-	int retorno = -1;
-	float bufferInt;
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
+	int retorno=-1;
+	float bufferFloat;
+
+ 	if(pResultadoF != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
 	{
 		do
 		{
 			printf("%s",mensaje);
-			scanf("%f",&bufferInt);
-			if(bufferInt >= minimo && bufferInt <= maximo)
+			if(getFloat(&bufferFloat) == 0 && bufferFloat >= minimo && bufferFloat <= maximo)
 			{
-				*pResultado = bufferInt;
+				*pResultadoF = bufferFloat;
 				retorno = 0;
 				break;
 			}
@@ -203,8 +259,8 @@ int utn_getNumberFloat(float* pResultado, char* mensaje, char* mensajeError, flo
 				reintentos--;
 			}
 		}while(reintentos >= 0);
-	 }
-	return retorno;
+	}
+		return retorno;
 }
 
 /**

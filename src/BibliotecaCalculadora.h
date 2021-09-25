@@ -7,13 +7,13 @@
 
 #ifndef BIBLIOTECACALCULADORA_H_
 #define BIBLIOTECACALCULADORA_H_
-#define MaxValueINT 2147483647
-#define MinValueINT -2147483647
+#define MaxValue 2147483647
+#define MinValue -2147483647
 
-int multiplicar(int primerNumero, int segundoNumero, int* pResultado);
-int dividir(int primerNumero, int segundoNumero, float* pResultado);
-int restar(int primerNumero, int segundoNumero, int* pResultado);
-int sumar(int primerNumero, int segundoNumero, int* pResultado);
+int multiplicar(float primerNumero, float segundoNumero, float* pResultado);
+int dividir(float primerNumero, float segundoNumero, float* pResultado);
+int restar(float primerNumero, float segundoNumero, float* pResultado);
+int sumar(float primerNumero, float segundoNumero, float* pResultado);
 long int factorial(int primerNumero,long int* pResultado);
 
 #endif /* BIBLIOTECACALCULADORA_H_ */
