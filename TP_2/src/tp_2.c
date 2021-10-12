@@ -23,8 +23,6 @@ int main(void)
 	int id = 100;
 	int opcion;
 	int flagCarga = 0;
-	int retornoSortLastname;
-	int retornoSortSector;
 	initEmployees(arrayEmp, TAM);
 
     do
@@ -54,14 +52,11 @@ int main(void)
 				}
 				break;
 			case 4:
-                 showListEmployee(arrayEmp, TAM);
-                retornoSortLastname = sortEmployeesLastName(arrayEmp, TAM);
-                printf("retorno SORT %d", retornoSortLastname);
-                showListEmployee(arrayEmp, TAM);
-                printf("-------------------------------------------");
-                retornoSortSector = sortEmployeesSector(arrayEmp, TAM);
-                printf("retorno SORT SECTOR %d", retornoSortSector);
-                showListEmployee(arrayEmp, TAM);
+				showListEmployee(arrayEmp, TAM);
+				sortEmployeesLastName(arrayEmp, TAM);
+				showListEmployee(arrayEmp, TAM);
+
+
 				break;
 			case 5:
 				printf("FIN DEL PROGRAMA");

@@ -418,91 +418,26 @@ int sortEmployeesLastName(Employee* arrayEmp, int len)
 					arrayEmp[i+1] = bufferEmployee;
 					retorno = 0;
 				}
-				newLen--;
-			}
-
-		}while(flag == 0);
-
-		}
-
-	return retorno;
-}
-
-int sortEmployeesSector(Employee* arrayEmp, int len)
-{
-	int retorno = -1;
-	int flag = 1;
-	int newLen;
-	Employee bufferEmployee;
-
-	if(arrayEmp != NULL)
-	{
-		newLen = len -1;
-		do
-		{
-			flag = 1;
-			for(int i = 0; i < newLen; i++)
-			{
-				if(arrayEmp[i].sector > arrayEmp[i+1].sector)
-				{
-					flag = 0;
-					bufferEmployee = arrayEmp[i];
-					arrayEmp[i] = arrayEmp[i+1];
-					arrayEmp[i+1] = bufferEmployee;
-					retorno = 0;
-				}
-				newLen--;
-			}
-
-		}while(flag == 0);
-	}
-	return retorno;
-}
-
-int sortEmployees(Employee* arrayEmp, int len)
-{
-	int retorno = -1;
-	int newLen;
-	int flag = 1;
-
-	if(arrayEmp != NULL)
-	{
-		newLen = len -1;
-
-		do
-		{
-			for(int i = 0; i < newLen; i++)
-			{
-				if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) == 0)
-				{
-					if(sortEmployeesSector(arrayEmp, len) == 0)
-					{
-						flag = 0;
-						printf("ENTRO A SORT SECTOR");
-					}
-				}
 				else
 				{
-					if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) > 0)
+					if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) == 0)
 					{
-						if(sortEmployeesLastName(arrayEmp, len) == 0)
+						if(arrayEmp[i].sector > arrayEmp[i+1].sector)
 						{
 							flag = 0;
-							printf("entro a SORT LASTNAME");
+							bufferEmployee = arrayEmp[i];
+							arrayEmp[i] = arrayEmp[i+1];
+							arrayEmp[i+1] = bufferEmployee;
+							retorno = 0;
 						}
 					}
-					newLen--;
 				}
+				newLen--;
 			}
 
 		}while(flag == 0);
-
-	}
-
-
-
+		}
 	return retorno;
-
 }
 
 
