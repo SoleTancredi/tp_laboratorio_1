@@ -56,10 +56,14 @@ int menuEmployee()
  */
 void initEmployees(Employee* arrayEmp,int tam)
 {
-	for(int i=0;i<tam;i++)
+	if(arrayEmp != NULL && tam > 0)
 	{
-		arrayEmp[i].isEmpty=0;
+		for(int i=0;i<tam;i++)
+		{
+			arrayEmp[i].isEmpty=0;
+		}
 	}
+
 }
 
 /**
@@ -73,18 +77,15 @@ void cargaEmployeeHard(Employee* arrayEmp, int* id)
 {
 	Employee bufferArray[] =
 	{
-			{101, "Roberta", "Perez", 13560.2, 2,1},
-			{102, "Magenta", "Rosales", 12500, 16,1},
-			{103, "Fernando", "Huespedes", 5600.35, 4,1},
-			{104, "Luano", "Papanopulos", 52360.45, 78,1},
-			{105, "Ramiro", "Gordo", 5689.10, 2,1},
-			{106, "Luci", "China", 2500, 10,1},
-			{107, "Luci", "China", 2500, 10,0}
+			{100, "Roberta", "Bonanza", 13560.2, 2,1},
+			{101, "Magenta", "Perez", 12500, 16,1},
+			{102, "Fernando", "Huespedes", 5600.35, 4,1},
 	};
 
-    for(int i = 0; i < 6; i++)
+    for(int i = 0; i < 3; i++)
     {
     	arrayEmp[i] = bufferArray[i];
+    	(*id)++;
     }
 
 
@@ -177,11 +178,12 @@ int registerAnEmployee(Employee* arrayEmp, int len, int* id)
     {
     	i = findIsEmpty(arrayEmp, len);
 
-    	if(utn_nombreOapellido(auxEmployee.name, "Ingrese el nombre: ","Error. Reingrese el nombre", LEN, 1) == 0
-    			&& utn_nombreOapellido(auxEmployee.lastName,"Ingrese el apellido: ", "Error. Reingrese el apellido", LEN,1) == 0
+    	if(utn_nombreOapellido(auxEmployee.name, "Ingrese el nombre: ","Error. Reingrese el nombre", TAM, 1) == 0
+    			&& utn_nombreOapellido(auxEmployee.lastName,"Ingrese el apellido: ", "Error. Reingrese el apellido", TAM,1) == 0
     			&& utn_getNumberFloat(&auxEmployee.salary,"Ingrese el sueldo: ", "Error. Reingrese el sueldo:", 0, 1000000,1) == 0
     			&& utn_getNumber(&auxEmployee.sector, "Ingrese el sector:","Error. Reingrese el sector:", 1, 50, 1) == 0)
 		{
+    		printf("ubicacion INDEX -- > %d", i);
 			addEmployee(&arrayEmp[i], id, auxEmployee.name, auxEmployee.lastName, auxEmployee.salary, auxEmployee.sector);
 			retorno = 0;
 		}
@@ -380,5 +382,58 @@ int deleteOneEmp(Employee* unitEmployee)
 	}
 	return retorno;
 }
+
+int menuReports()
+{
+	int option;
+
+	printf("***** INFORMES *****");
+
+	if(utn_getNumber(&option, "\nElija una opcion:"
+			"\n1. Listar empleados alfabeticamente."
+			"\n2. Informe de Salarios."
+			"\n3. Salir de Informes.", "\nError. Reingrese la opcion.", 1,3, 1) == 0)
+	{
+		printf("\nUsted ha ingresado la opcion nº %d", option);
+	}
+
+	return option;
+}
+
+int sortEmployees(Employee* arrayEmp, int len)//ordena mayor a menor
+{
+	int retorno = -1;
+	int flag = 1;
+	int newLen;
+	Employee bufferEmployee;
+
+	if(arrayEmp != NULL)
+	{
+		newLen = len - 1;
+		do
+		{
+			flag = 1;
+			for(int i = 0; i < newLen; i++)
+			{
+				if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) > 0)
+				{
+					flag = 0;
+					bufferEmployee = arrayEmp[i];
+					arrayEmp[i] = arrayEmp[i+1];
+					arrayEmp[i+1] = bufferEmployee;
+					retorno = 0;
+				}
+			}
+
+			newLen--;
+
+		}while(flag == 0);
+
+		}
+
+	return retorno;
+}
+
+
 
 

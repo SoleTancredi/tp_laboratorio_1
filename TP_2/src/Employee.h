@@ -8,6 +8,7 @@
 #ifndef EMPLOYEE_H_
 #define EMPLOYEE_H_
 #define LEN 51
+#define TAM 100
 
 
 struct
@@ -34,5 +35,7 @@ int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float s
 int menuModify(Employee* arrayEmp, int len, int* index, int* option);
 int modifyEmployee(Employee* arrayEmp, int len);
 int deleteOneEmp(Employee* unitEmployee);
+int menuReports();
+int sortEmployees(Employee* arrayEmp, int len);
 
 #endif /* EMPLOYEE_H_ */

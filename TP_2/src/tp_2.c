@@ -52,8 +52,10 @@ int main(void)
 				}
 				break;
 			case 4:
-				if(flagCarga == 1)
+				showListEmployee(arrayEmp, TAM);
+				if(sortEmployees(arrayEmp, TAM)==0 )
 				{
+					printf("funciono");
 					showListEmployee(arrayEmp, TAM);
 				}
 				else
