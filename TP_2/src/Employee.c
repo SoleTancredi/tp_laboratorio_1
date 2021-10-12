@@ -20,7 +20,7 @@
  *
  * @return devuelve un entero, en este caso indicando la opcion elegida
  */
-int utn_menu()
+int menuEmployee()
 {
 	int option;
 
@@ -37,7 +37,8 @@ int utn_menu()
 			"\n7. Total de sueldos."
 			"\n8. Promedio de sueldos."
 			"\n9. Numero de empleados por sobre el monto promedio del sueldo."
-			"\n------------------------------------------------\n", "\nError. Reingrese la opcion:\n", 1, 9, 1) == 0)
+			"\n10.Salir."
+			"\n------------------------------------------------\n", "\nError. Reingrese la opcion:\n", 1, 10, 1) == 0)
 	{
 		printf("\nUsted ha elegido la opcion: %d\n", option);
 	}
@@ -135,22 +136,25 @@ void showListEmployee(Employee* arrayEmp, int tam)
 int deleteEmployee(Employee* arrayEmp, int len)
 {
 	int retorno = -1;
-	int respuesta;
+	int id;
+	int index;
 
-	showListEmployee(arrayEmp, len);
-
-	utn_getNumber(&respuesta, "Ingrese el Id del empleado que desea eliminar:"
-			, "Error. Reingrese el ID:", 100, 1000, 1);
-
-	for(int i = 0; i < len; i++)
+	if(arrayEmp != NULL)
 	{
-		if(arrayEmp[i].id == respuesta)
+		printf("\n***** DAR DE BAJA UN EMPLEADO *****\n");
+
+		showListEmployee(arrayEmp, len);
+
+	 if(utn_getNumber(&id, "Ingrese el Id del empleado que desea eliminar:"
+				, "Error. Reingrese el ID:", 100, 1000, 1) == 0 && findById(arrayEmp, len, id, &index))
+
+		if(deleteOneEmp(&arrayEmp[index]) == 0)
 		{
-		    retorno = 0;
-			arrayEmp[i].isEmpty = 0;
-			break;
+			retorno = 0;
 		}
 	}
+
+
    return retorno;
 }
 
@@ -269,7 +273,8 @@ int menuModify(Employee* arrayEmp, int len, int* index, int* option)
 					"\n2. APELLIDO. "
 					"\n3. SALARIO. "
 					"\n4. SECTOR. "
-					, "\nError. Reingrese la opcion.", 1,4, 1) == 0)
+					"\n5. SALIR. "
+					, "\nError. Reingrese la opcion.", 1,5, 1) == 0)
 			{
 				printf("\nUsted ha ingresado la opcion nº %d", *option);
 				retorno = 0;
@@ -362,6 +367,18 @@ int modifyEmployee(Employee* arrayEmp, int len)
 
 	return retorno;
 
+}
+
+int deleteOneEmp(Employee* unitEmployee)
+{
+	int retorno=-1;
+
+	if(unitEmployee!=NULL)
+	{
+		(*unitEmployee).isEmpty=0;
+		retorno =0 ;
+	}
+	return retorno;
 }
 
 

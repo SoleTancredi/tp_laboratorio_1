@@ -21,17 +21,18 @@ struct
 
 }typedef Employee;
 
-int utn_menu();
+int menuEmployee();
 void initEmployees(Employee* arrayEmp,int tam);
 void cargaEmployeeHard(Employee* arrayEmp, int* id);
 void mostrarDatosEmployee(Employee unidadEmp);
-void showListEmployee(Employee* arrayEmp, int tam);
 int deleteEmployee(Employee* arrayEmp, int len);
+void showListEmployee(Employee* arrayEmp, int tam);
 int findIsEmpty(Employee* arrayE, int tam);
 int findById(Employee* arraEmp, int len, int id, int* index);
 int registerAnEmployee(Employee* arrayEmp, int len, int* id);
 int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float salary, int sector);
 int menuModify(Employee* arrayEmp, int len, int* index, int* option);
 int modifyEmployee(Employee* arrayEmp, int len);
+int deleteOneEmp(Employee* unitEmployee);
 
 #endif /* EMPLOYEE_H_ */
