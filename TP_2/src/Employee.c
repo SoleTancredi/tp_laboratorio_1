@@ -15,8 +15,7 @@
 
 /**
  * @fn int utn_menu()
- * @brief muestra un cartel de menu con opciones para que el ususario elija la accion que
- * desea realizar
+ * @brief muestra un cartel de menu con opciones
  *
  * @return devuelve un entero, en este caso indicando la opcion elegida
  */
@@ -40,6 +39,80 @@ int menuEmployee()
 
 	return option;
 }
+
+/**
+ * @fn int menuModify(Employee*, int, int*, int*)
+ * @brief muestra un cartel que solicita el ingreso del Id que se debe buscar,
+ * ademas muestra opciones y  devuelve la ubicacion de ese elemento por referencia y la opcion elegida
+ *
+ *
+ * @param arrayEmp
+ * @param len
+ * @param index
+ * @param option
+ * @return devuelve 0 si la funcion pudo realizar su trabajo
+ */
+
+int menuModify(Employee* arrayEmp, int len, int* index, int* option)
+{
+	int retorno = -1;
+	int idWanted;
+
+	if(arrayEmp != NULL && index != NULL && option != NULL)
+	{
+		printf("***** MODIFICAR DATOS DEL EMPLEADO *****");
+
+		if(utn_getNumber(&idWanted,"\nIngrese el ID del empleado que desea modificar."
+				,"\nError. Reingrese el ID.",0, 1000, 1) == 0 &&
+				findById(arrayEmp, len, idWanted, index) == 0)
+		{
+			if(utn_getNumber(option,"\nIngrese la opcion del dato que desea modificar: "
+					"\n1. NOMBRE. "
+					"\n2. APELLIDO. "
+					"\n3. SALARIO. "
+					"\n4. SECTOR. "
+					"\n5. SALIR. "
+					, "\nError. Reingrese la opcion.", 1,5, 1) == 0)
+			{
+				printf("\nUsted ha ingresado la opcion nº %d", *option);
+				retorno = 0;
+			}
+
+		}
+		else
+		{
+			printf("\nEl ID ingreado es inexistente.");
+		}
+
+	}
+
+	return retorno;
+}
+
+/**
+ * @fn int menuReports()
+ * @brief muestra un cartel de menu con opciones devolviendo por referencia el indice y la opcion
+ *
+ * @return retorna la opcion
+ */
+
+int menuReports()
+{
+	int option;
+
+	printf("***** INFORMES *****");
+
+	if(utn_getNumber(&option, "\nElija una opcion:"
+			"\n1. Listar empleados alfabeticamente."
+			"\n2. Informe de Salarios."
+			"\n3. Salir de Informes.", "\nError. Reingrese la opcion.", 1,3, 1) == 0)
+	{
+		printf("\nUsted ha ingresado la opcion nº %d", option);
+	}
+
+	return option;
+}
+
 
 /**
  * @fn void initEmployees(Employee*, int)
@@ -72,9 +145,9 @@ void cargaEmployeeHard(Employee* arrayEmp, int* id)
 {
 	Employee bufferArray[] =
 	{
-			{100, "Roberta", "Bonanza", 13560.2, 2,1},
-			{101, "Magenta", "Perez", 12500, 10,1},
-			{102, "Fernando", "Huespedes", 5600.35, 4,1},
+			{100, "Roberta", "Bonanza", 45270.5, 2,1},
+			{101, "Magenta", "Perez", 130500.6, 10,1},
+			{102, "Fernando", "Huespedes", 15000, 4,1},
 	};
 
     for(int i = 0; i < 3; i++)
@@ -142,7 +215,7 @@ int deleteEmployee(Employee* arrayEmp, int len)
 		showListEmployee(arrayEmp, len);
 
 	 if(utn_getNumber(&id, "Ingrese el Id del empleado que desea eliminar:"
-				, "Error. Reingrese el ID:", 100, 1000, 1) == 0 && findById(arrayEmp, len, id, &index))
+				, "Error. Reingrese el ID:", 100, 1000, 1) == 0 && findById(arrayEmp, len, id, &index) == 0)
 
 		if(deleteOneEmp(&arrayEmp[index]) == 0)
 		{
@@ -178,7 +251,6 @@ int registerAnEmployee(Employee* arrayEmp, int len, int* id)
     			&& utn_getNumberFloat(&auxEmployee.salary,"Ingrese el sueldo: ", "Error. Reingrese el sueldo:", 0, 1000000,1) == 0
     			&& utn_getNumber(&auxEmployee.sector, "Ingrese el sector:","Error. Reingrese el sector:", 1, 50, 1) == 0)
 		{
-    		printf("ubicacion INDEX -- > %d", i);
 			addEmployee(&arrayEmp[i], id, auxEmployee.name, auxEmployee.lastName, auxEmployee.salary, auxEmployee.sector);
 			retorno = 0;
 		}
@@ -215,6 +287,19 @@ int findIsEmpty(Employee* arrayE, int tam)
 
 	return index;
 }
+/**
+ * @fn int addEmployee(Employee*, int*, char*, char*, float, int)
+ * @brief recibe por parametro los datos y se encarga de completar correctamente cada campo
+ * del elemento
+ *
+ * @param arrayEmp
+ * @param id
+ * @param name
+ * @param lastName
+ * @param salary
+ * @param sector
+ * @return
+ */
 
 int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float salary, int sector)
 {
@@ -235,6 +320,16 @@ int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float s
 	return retorno;
 }
 
+/**
+ * @fn int findById(Employee*, int, int, int*)
+ * @brief busca el elemento correspondiente a un id determinado, devuelve por referencia su indice
+ *
+ * @param arraEmp
+ * @param len
+ * @param id
+ * @param index
+ * @return 0 si la funcion pudo cumplir con su tarea
+ */
 int findById(Employee* arraEmp, int len, int id, int* index)
 {
 	int retorno = -1;
@@ -254,40 +349,15 @@ int findById(Employee* arraEmp, int len, int id, int* index)
 	return retorno;
 }
 
-int menuModify(Employee* arrayEmp, int len, int* index, int* option)
-{
-	int retorno = -1;
-	int idWanted;
-
-	if(arrayEmp != NULL && index != NULL && option != NULL)
-	{
-		if(utn_getNumber(&idWanted,"\nIngrese el ID del empleado que desea modificar."
-				,"\nError. Reingrese el ID.",0, 1000, 1) == 0 &&
-				findById(arrayEmp, len, idWanted, index) == 0)
-		{
-			if(utn_getNumber(option,"\nIngrese la opcion del dato que desea modificar: "
-					"\n1. NOMBRE. "
-					"\n2. APELLIDO. "
-					"\n3. SALARIO. "
-					"\n4. SECTOR. "
-					"\n5. SALIR. "
-					, "\nError. Reingrese la opcion.", 1,5, 1) == 0)
-			{
-				printf("\nUsted ha ingresado la opcion nº %d", *option);
-				retorno = 0;
-			}
-
-		}
-		else
-		{
-			printf("\nEl ID ingreado es inexistente.");
-		}
-
-	}
-
-	return retorno;
-}
-
+/**
+ * @fn int modifyEmployee(Employee*, int)
+ * @brief modifica los datos de los campos elegidos
+ *
+ *
+ * @param arrayEmp
+ * @param len
+ * @return 0 si la funcion pudo cumplir con su tarea
+ */
 int modifyEmployee(Employee* arrayEmp, int len)
 {
 	int retorno = -1;
@@ -366,6 +436,14 @@ int modifyEmployee(Employee* arrayEmp, int len)
 
 }
 
+/**
+ * @fn int deleteOneEmp(Employee*)
+ * @brief  elimina el elemento, dandolo de baja de manera logica
+ *
+ * @param unitEmployee
+ * @return 0 si la funcion pudo cumplir su tarea
+ */
+
 int deleteOneEmp(Employee* unitEmployee)
 {
 	int retorno=-1;
@@ -378,22 +456,16 @@ int deleteOneEmp(Employee* unitEmployee)
 	return retorno;
 }
 
-int menuReports()
-{
-	int option;
 
-	printf("***** INFORMES *****");
-
-	if(utn_getNumber(&option, "\nElija una opcion:"
-			"\n1. Listar empleados alfabeticamente."
-			"\n2. Informe de Salarios."
-			"\n3. Salir de Informes.", "\nError. Reingrese la opcion.", 1,3, 1) == 0)
-	{
-		printf("\nUsted ha ingresado la opcion nº %d", option);
-	}
-
-	return option;
-}
+/**
+ * @fn int sortEmployeesLastName(Employee*, int)
+ * @brief ordena el listado de elementos alfabeticamente por su apellido, en caso de exitir dos apellido iguales
+ * ordena los mismos por sector
+ *
+ * @param arrayEmp
+ * @param len
+ * @return 0 si la funcion pudo cumplir con su tarea
+ */
 
 int sortEmployeesLastName(Employee* arrayEmp, int len)
 {
@@ -440,6 +512,15 @@ int sortEmployeesLastName(Employee* arrayEmp, int len)
 	return retorno;
 }
 
+/**
+ * @fn float totalSalaries(Employee*, int)
+ * @brief recorre el array acumulando el salario de cada elemento
+ *
+ * @param arrayEmp
+ * @param len
+ * @return devuelve el total de los mismos
+ */
+
 float totalSalaries(Employee* arrayEmp, int len)
 {
 	float totalSalaries=0;
@@ -458,6 +539,14 @@ float totalSalaries(Employee* arrayEmp, int len)
 	return totalSalaries;
 }
 
+/**
+ * @fn int employeeCount(Employee*, int)
+ * @brief cuenta la cantidad de empleados existentes
+ *
+ * @param arrayEmp
+ * @param len
+ * @return devuelve la cantidad
+ */
 int employeeCount(Employee* arrayEmp, int len)
 {
 	int cantidad = 0;
@@ -472,7 +561,18 @@ int employeeCount(Employee* arrayEmp, int len)
 	return cantidad;
 }
 
-
+/**
+ * @fn int infoSalaries(Employee*, int, float*, float*, int*)
+ * @brief devuelve por referencia el total de salarios, el promedio y la cantidad de empleados que se encuentran
+ * conn un salario por sobre el promedio
+ *
+ * @param arrayEmp
+ * @param len
+ * @param total
+ * @param promedio
+ * @param exceedAverage
+ * @return 0 si la funcion pudo cumplir con su tarea
+ */
 int infoSalaries(Employee* arrayEmp, int len, float* total, float* promedio, int* exceedAverage )
 {
 	int retorno = -1;
