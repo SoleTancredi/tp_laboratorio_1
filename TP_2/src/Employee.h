@@ -36,7 +36,8 @@ int menuModify(Employee* arrayEmp, int len, int* index, int* option);
 int modifyEmployee(Employee* arrayEmp, int len);
 int deleteOneEmp(Employee* unitEmployee);
 int menuReports();
-int sortEmployees(Employee* arrayEmp, int len);
+int sortEmployeesLastName(Employee* arrayEmp, int len);
 int sortEmployeesSector(Employee* arrayEmp, int len);
+int sortEmployees(Employee* arrayEmp, int len);
 
 #endif /* EMPLOYEE_H_ */

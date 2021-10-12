@@ -23,6 +23,8 @@ int main(void)
 	int id = 100;
 	int opcion;
 	int flagCarga = 0;
+	int retornoSortLastname;
+	int retornoSortSector;
 	initEmployees(arrayEmp, TAM);
 
     do
@@ -52,23 +54,21 @@ int main(void)
 				}
 				break;
 			case 4:
-
-				if(sortEmployees(arrayEmp, TAM)==0 )
-				{
-					printf("funciono");
-					showListEmployee(arrayEmp, TAM);
-				}
-				else
-				{
-					printf("\nNo hay elementos cargados.");
-				}
+                 showListEmployee(arrayEmp, TAM);
+                retornoSortLastname = sortEmployeesLastName(arrayEmp, TAM);
+                printf("retorno SORT %d", retornoSortLastname);
+                showListEmployee(arrayEmp, TAM);
+                printf("-------------------------------------------");
+                retornoSortSector = sortEmployeesSector(arrayEmp, TAM);
+                printf("retorno SORT SECTOR %d", retornoSortSector);
+                showListEmployee(arrayEmp, TAM);
 				break;
 			case 5:
 				printf("FIN DEL PROGRAMA");
 				break;
     		}
 
-    }while(opcion != 10);
+    }while(opcion != 5);
 
 
 

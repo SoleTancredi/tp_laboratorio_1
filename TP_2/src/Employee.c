@@ -73,7 +73,7 @@ void cargaEmployeeHard(Employee* arrayEmp, int* id)
 	Employee bufferArray[] =
 	{
 			{100, "Roberta", "Bonanza", 13560.2, 2,1},
-			{101, "Magenta", "Perez", 12500, 16,1},
+			{101, "Magenta", "Perez", 12500, 10,1},
 			{102, "Fernando", "Huespedes", 5600.35, 4,1},
 	};
 
@@ -395,7 +395,7 @@ int menuReports()
 	return option;
 }
 
-int sortEmployees(Employee* arrayEmp, int len)
+int sortEmployeesLastName(Employee* arrayEmp, int len)
 {
 	int retorno = -1;
 	int flag = 1;
@@ -418,21 +418,6 @@ int sortEmployees(Employee* arrayEmp, int len)
 					arrayEmp[i+1] = bufferEmployee;
 					retorno = 0;
 				}
-				else
-				{
-					for(int i = 0; i < newLen; i++)
-					{
-						if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) == 0)
-						{
-							if(sortEmployeesSector(arrayEmp, len) == 0)
-							{
-								printf("funciono");
-
-							}
-						}
-					}
-
-				}
 				newLen--;
 			}
 
@@ -448,7 +433,6 @@ int sortEmployeesSector(Employee* arrayEmp, int len)
 	int retorno = -1;
 	int flag = 1;
 	int newLen;
-
 	Employee bufferEmployee;
 
 	if(arrayEmp != NULL)
@@ -456,9 +440,10 @@ int sortEmployeesSector(Employee* arrayEmp, int len)
 		newLen = len -1;
 		do
 		{
+			flag = 1;
 			for(int i = 0; i < newLen; i++)
 			{
-				if(arrayEmp[i].sector < arrayEmp[i+1].sector)
+				if(arrayEmp[i].sector > arrayEmp[i+1].sector)
 				{
 					flag = 0;
 					bufferEmployee = arrayEmp[i];
@@ -472,6 +457,52 @@ int sortEmployeesSector(Employee* arrayEmp, int len)
 		}while(flag == 0);
 	}
 	return retorno;
+}
+
+int sortEmployees(Employee* arrayEmp, int len)
+{
+	int retorno = -1;
+	int newLen;
+	int flag = 1;
+
+	if(arrayEmp != NULL)
+	{
+		newLen = len -1;
+
+		do
+		{
+			for(int i = 0; i < newLen; i++)
+			{
+				if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) == 0)
+				{
+					if(sortEmployeesSector(arrayEmp, len) == 0)
+					{
+						flag = 0;
+						printf("ENTRO A SORT SECTOR");
+					}
+				}
+				else
+				{
+					if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) > 0)
+					{
+						if(sortEmployeesLastName(arrayEmp, len) == 0)
+						{
+							flag = 0;
+							printf("entro a SORT LASTNAME");
+						}
+					}
+					newLen--;
+				}
+			}
+
+		}while(flag == 0);
+
+	}
+
+
+
+	return retorno;
+
 }
 
 
