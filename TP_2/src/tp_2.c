@@ -22,7 +22,11 @@ int main(void)
 	Employee arrayEmp[TAM];
 	int id = 100;
 	int opcion;
+	int opcionInformes;
 	int flagCarga = 0;
+	float totalSalarios;
+	float promedioSalarios;
+	int cantEmpleadosSobrePromedio;
 	initEmployees(arrayEmp, TAM);
 
     do
@@ -52,9 +56,39 @@ int main(void)
 				}
 				break;
 			case 4:
-				showListEmployee(arrayEmp, TAM);
-				sortEmployeesLastName(arrayEmp, TAM);
-				showListEmployee(arrayEmp, TAM);
+
+				if(flagCarga == 1)
+				{
+					opcionInformes = menuReports();
+
+					switch(opcionInformes)
+					{
+						case 1:
+							if(sortEmployeesLastName(arrayEmp, TAM) == 0)
+							{
+								printf("\n// LISTA ORDENADA CORRECTAMENTE. //");
+							}
+							else
+							{
+								printf("\nNo se ha podido realizar la operacion.");
+							}
+							break;
+						case 2:
+							if(infoSalaries(arrayEmp, TAM, &totalSalarios, &promedioSalarios, &cantEmpleadosSobrePromedio) == 0)
+							{
+								printf("\nEl total de todos los salarios es: %.2f", totalSalarios);
+								printf("\nEl promedio de todos los salarios es: %.2f", promedioSalarios);
+								printf("\nLa cantidad de empleado con un salario por sobre el promedio es: %d", cantEmpleadosSobrePromedio);
+							}
+							break;
+						case 3:
+
+							break;
+					}
+
+				}
+
+
 
 
 				break;

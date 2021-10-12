@@ -440,6 +440,62 @@ int sortEmployeesLastName(Employee* arrayEmp, int len)
 	return retorno;
 }
 
+float totalSalaries(Employee* arrayEmp, int len)
+{
+	float totalSalaries=0;
 
+	if(arrayEmp != NULL)
+	{
+		for(int i = 0; i < len; i++)
+		{
+			if(arrayEmp[i].isEmpty==1)
+			{
+				totalSalaries += arrayEmp[i].salary;
+			}
+		}
+	}
+
+	return totalSalaries;
+}
+
+int employeeCount(Employee* arrayEmp, int len)
+{
+	int cantidad = 0;
+
+	for(int i = 0; i < len; i++)
+	{
+		if(arrayEmp[i].isEmpty==1)
+		{
+			cantidad++;
+		}
+	}
+	return cantidad;
+}
+
+
+int infoSalaries(Employee* arrayEmp, int len, float* total, float* promedio, int* exceedAverage )
+{
+	int retorno = -1;
+	int counterExceedAverage=0;
+
+	if(arrayEmp != NULL && total != NULL && promedio != NULL && exceedAverage != NULL)
+	{
+		*total = totalSalaries(arrayEmp, len);
+		*promedio =  *total/employeeCount(arrayEmp, len);
+
+		for(int i = 0; i < len; i++)
+		{
+			if(arrayEmp[i].salary > *promedio)
+			{
+				counterExceedAverage++;
+			}
+		}
+
+		*exceedAverage = counterExceedAverage;
+		retorno = 0;
+	}
+
+	return retorno;
+}
 
 

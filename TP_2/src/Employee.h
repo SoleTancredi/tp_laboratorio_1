@@ -37,6 +37,8 @@ int modifyEmployee(Employee* arrayEmp, int len);
 int deleteOneEmp(Employee* unitEmployee);
 int menuReports();
 int sortEmployeesLastName(Employee* arrayEmp, int len);
-
+float totalSalaries(Employee* arrayEmp, int len);
+int employeeCount(Employee* arrayEmp, int len);
+int infoSalaries(Employee* arrayEmp, int len, float* total, float* promedio, int* exceedAverage );
 
 #endif /* EMPLOYEE_H_ */
