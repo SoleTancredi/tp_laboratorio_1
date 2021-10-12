@@ -32,13 +32,8 @@ int menuEmployee()
 			"\n2. Modificar un empleado."
 			"\n3. Dar de baja un empleado."
 			"\n4. Mostrar lista de empleados."
-			"\n5. Ordenar alfabeticamente en orden ascendente."
-			"\n6. Ordenar alfabeticamente en orden descendente."
-			"\n7. Total de sueldos."
-			"\n8. Promedio de sueldos."
-			"\n9. Numero de empleados por sobre el monto promedio del sueldo."
-			"\n10.Salir."
-			"\n------------------------------------------------\n", "\nError. Reingrese la opcion:\n", 1, 10, 1) == 0)
+			"\n5. Salir"
+			"\n------------------------------------------------\n", "\nError. Reingrese la opcion:\n", 1, 5, 1) == 0)
 	{
 		printf("\nUsted ha elegido la opcion: %d\n", option);
 	}
@@ -400,7 +395,7 @@ int menuReports()
 	return option;
 }
 
-int sortEmployees(Employee* arrayEmp, int len)//ordena mayor a menor
+int sortEmployees(Employee* arrayEmp, int len)
 {
 	int retorno = -1;
 	int flag = 1;
@@ -423,14 +418,59 @@ int sortEmployees(Employee* arrayEmp, int len)//ordena mayor a menor
 					arrayEmp[i+1] = bufferEmployee;
 					retorno = 0;
 				}
-			}
+				else
+				{
+					for(int i = 0; i < newLen; i++)
+					{
+						if(strcmp(arrayEmp[i].lastName, arrayEmp[i+1].lastName) == 0)
+						{
+							if(sortEmployeesSector(arrayEmp, len) == 0)
+							{
+								printf("funciono");
 
-			newLen--;
+							}
+						}
+					}
+
+				}
+				newLen--;
+			}
 
 		}while(flag == 0);
 
 		}
 
+	return retorno;
+}
+
+int sortEmployeesSector(Employee* arrayEmp, int len)
+{
+	int retorno = -1;
+	int flag = 1;
+	int newLen;
+
+	Employee bufferEmployee;
+
+	if(arrayEmp != NULL)
+	{
+		newLen = len -1;
+		do
+		{
+			for(int i = 0; i < newLen; i++)
+			{
+				if(arrayEmp[i].sector < arrayEmp[i+1].sector)
+				{
+					flag = 0;
+					bufferEmployee = arrayEmp[i];
+					arrayEmp[i] = arrayEmp[i+1];
+					arrayEmp[i+1] = bufferEmployee;
+					retorno = 0;
+				}
+				newLen--;
+			}
+
+		}while(flag == 0);
+	}
 	return retorno;
 }
 
