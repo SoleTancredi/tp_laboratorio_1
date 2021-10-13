@@ -55,7 +55,7 @@ int main(void)
 				}
 				break;
 			case 3:
-				if(flagCarga == 1 && deleteEmployee(arrayEmp, TAM))
+				if(flagCarga == 1 && deleteEmployee(arrayEmp, TAM) == 0)
 				{
 					printf("\n// EL EMPLEADO HA SIDO ELIMINADO EXITOSAMENTE. \\");
 				}
@@ -111,18 +111,6 @@ int main(void)
     		}
 
     }while(opcion != 5);
-
-
-
-
-
-
-
-
-
-
-
-
 
 	return EXIT_SUCCESS;
 }
