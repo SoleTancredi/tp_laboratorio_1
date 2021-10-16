@@ -64,7 +64,7 @@ int menuModify(Employee* arrayEmp, int len, int* index, int* option)
 
 		if(utn_getNumber(&idWanted,"\nIngrese el ID del empleado que desea modificar."
 				,"\nError. Reingrese el ID.",0, 1000, 1) == 0 &&
-				findById(arrayEmp, len, idWanted, index) == 0)
+				indexById(arrayEmp, len, idWanted, index) == 0)
 		{
 			if(utn_getNumber(option,"\nIngrese la opcion del dato que desea modificar: "
 					"\n1. NOMBRE. "
@@ -103,7 +103,7 @@ int menuReports()
 	printf("***** INFORMES *****");
 
 	if(utn_getNumber(&option, "\nElija una opcion:"
-			"\n1. Listar empleados alfabeticamente."
+			"\n1. Listar empleados ordenados alfabeticamente por apellido."
 			"\n2. Informe de Salarios."
 			"\n3. Salir de Informes.", "\nError. Reingrese la opcion.", 1,3, 1) == 0)
 	{
@@ -215,7 +215,7 @@ int deleteEmployee(Employee* arrayEmp, int len)
 		showListEmployee(arrayEmp, len);
 
 	 if(utn_getNumber(&id, "Ingrese el Id del empleado que desea eliminar:"
-				, "Error. Reingrese el ID:", 100, 1000, 1) == 0 && findById(arrayEmp, len, id, &index) == 0)
+				, "Error. Reingrese el ID:", 100, 1000, 1) == 0 && indexById(arrayEmp, len, id, &index) == 0)
 
 		if(deleteOneEmp(&arrayEmp[index]) == 0)
 		{
@@ -330,7 +330,7 @@ int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float s
  * @param index
  * @return 0 si la funcion pudo cumplir con su tarea
  */
-int findById(Employee* arraEmp, int len, int id, int* index)
+int indexById(Employee* arraEmp, int len, int id, int* index)
 {
 	int retorno = -1;
 

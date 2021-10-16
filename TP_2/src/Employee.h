@@ -10,7 +10,6 @@
 #define LEN 51
 #define TAM 100
 
-
 struct
 {
 	int id;
@@ -31,7 +30,7 @@ void mostrarDatosEmployee(Employee unidadEmp);
 int deleteEmployee(Employee* arrayEmp, int len);
 void showListEmployee(Employee* arrayEmp, int tam);
 int findIsEmpty(Employee* arrayE, int tam);
-int findById(Employee* arraEmp, int len, int id, int* index);
+int indexById(Employee* arraEmp, int len, int id, int* index);
 int registerAnEmployee(Employee* arrayEmp, int len, int* id);
 int addEmployee(Employee* arrayEmp, int* id, char* name, char* lastName, float salary, int sector);
 int modifyEmployee(Employee* arrayEmp, int len);

@@ -90,7 +90,7 @@ int main(void)
 								{
 									printf("\nEl total de todos los salarios es: %.2f", totalSalarios);
 									printf("\nEl promedio de todos los salarios es: %.2f", promedioSalarios);
-									printf("\nLa cantidad de empleado con un salario por sobre el promedio es: %d", cantEmpleadosSobrePromedio);
+									printf("\nLa cantidad de empleado con un salario por sobre el promedio es: %d\n", cantEmpleadosSobrePromedio);
 								}
 								break;
 							case 3:
