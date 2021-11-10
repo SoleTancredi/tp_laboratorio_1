@@ -29,8 +29,8 @@ int main()
     LinkedList* pipiList = ll_newLinkedList();
 
     Employee* pEmpleado = employee_new();
-    Employee* pEmpleadoDos=employee_newParametros("100", "papito","8","25600");
-    Employee* pEmpleadoTres = employee_newParametros("101", "johnyBGood", "5","154000");
+    Employee* pEmpleadoDos=employee_newParametros("100", "Papito","8","25600");
+    Employee* pEmpleadoTres = employee_newParametros("101", "JohnyBGood", "5","154000");
     if(pipiList != NULL)
     {
     	if(pEmpleado != NULL && pEmpleadoDos != NULL)
@@ -48,7 +48,8 @@ int main()
 				 controller_addEmployee(pipiList);
 
 				   controller_ListEmployee(pipiList);
-				   ll_sort(pipiList, employee_sortSalaryDescendant,1);
+				   ll_sort(pipiList, employee_sortHours,0);
+				   printf("-------------------------------------------------");
 				   controller_ListEmployee(pipiList);
 			}
 

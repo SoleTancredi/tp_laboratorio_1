@@ -400,9 +400,9 @@ int employee_register(Employee* this, int id)
 	return retorno;
 }
 
-int employee_sortSalaryDescendant(void* thisOne, void* thisTwo)
+int employee_sortSalary(void* thisOne, void* thisTwo)
 {
-	int retorno = -1;
+	int retorno = 0;
 	Employee* pBuffer1;
 	Employee* pBuffer2;
 
@@ -413,16 +413,75 @@ int employee_sortSalaryDescendant(void* thisOne, void* thisTwo)
 	{
 		if((*pBuffer1).sueldo < (*pBuffer2).sueldo)
 		{
-			retorno = 1;
+			retorno = -1;
 		}
 		else
 		{
-			retorno = 0;
+			if((*pBuffer1).sueldo > (*pBuffer2).sueldo)
+			{
+				retorno = 1;
+			}
 		}
 	}
 
 	return retorno;
 }
+
+int employee_sortHours(void* thisOne, void* thisTwo)
+{
+	int retorno = 0;
+	Employee* pBuffer1;
+	Employee* pBuffer2;
+
+	pBuffer1 = thisOne;
+	pBuffer2 = thisTwo;
+
+	if(thisOne != NULL && thisTwo != NULL)
+	{
+		if((*pBuffer1).horasTrabajadas< (*pBuffer2).horasTrabajadas)
+		{
+			retorno = -1;
+		}
+		else
+		{
+			if((*pBuffer1).horasTrabajadas > (*pBuffer2).horasTrabajadas)
+			{
+				retorno = 1;
+			}
+		}
+	}
+
+	return retorno;
+}
+
+int employee_sortNames(void* thisOne, void* thisTwo)
+{
+	int retorno = 0;
+	Employee* pBuffer1;
+	Employee* pBuffer2;
+
+	pBuffer1 = thisOne;
+	pBuffer2 = thisTwo;
+
+
+	if(thisOne != NULL && thisTwo != NULL)
+	{
+		if(strcmp((*pBuffer1).nombre, (*pBuffer2).nombre) < 0)
+		{
+			retorno = -1;
+		}
+		else
+		{
+			if(strcmp((*pBuffer1).nombre, (*pBuffer2).nombre) > 0)
+			{
+				retorno = 1;
+			}
+		}
+	}
+
+	return retorno;
+}
+
 
 
 
