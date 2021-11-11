@@ -15,7 +15,23 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int retorno = -1;
+	FILE* pFile;
+
+	pFile = fopen(path, "r");
+
+	if(pFile != NULL)
+	{
+		if(parser_EmployeeFromText(pFile, pArrayListEmployee) == 0)
+		{
+			retorno = 0;
+		}
+
+	}
+
+    fclose(pFile);
+
+    return retorno;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
