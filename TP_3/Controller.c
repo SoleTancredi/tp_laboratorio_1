@@ -26,7 +26,6 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 		{
 			retorno = 0;
 		}
-
 	}
 
     fclose(pFile);
@@ -43,7 +42,23 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int retorno = -1;
+
+	FILE* pFile;
+
+	pFile = fopen(path, "rb");
+
+	if(pFile != NULL)
+	{
+		if(parser_EmployeeFromBinary(pFile, pArrayListEmployee) == 0)
+		{
+			retorno = 0;
+		}
+	}
+
+	fclose(pFile);
+
+    return retorno;
 }
 
 /** \brief Alta de empleados
