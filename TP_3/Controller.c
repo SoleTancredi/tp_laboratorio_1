@@ -47,7 +47,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 
 	FILE* pFile;
 
-	pFile = fopen(path, "rb");
+	pFile = fopen(path, "r");
 
 	if(pFile != NULL)
 	{
@@ -309,32 +309,20 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-	int id;
-	char nombre[128];
-	int horasT;
-	int salario;
 	Employee* pBufferEmp;
 
 	if(path != NULL && pArrayListEmployee != NULL)
 	{
-		FILE* pFile;
-
-		pFile = fopen(path, "w");
-
+		FILE* pFile = fopen(path, "w");
 		if(pFile != NULL)
 		{
 
 			for(int i = 0; i < ll_len(pArrayListEmployee); i++)
 			{
 				pBufferEmp = ll_get(pArrayListEmployee, i);
-				employee_getId(pBufferEmp, &id);
-				employee_getNombre(pBufferEmp, nombre);
-				employee_getHorasTrabajadas(pBufferEmp, &horasT);
-				employee_getSueldo(pBufferEmp, &salario);
-				fwrite(pBufferEmp,1, pFile);
+				fwrite(pBufferEmp,sizeof(Employee),1, pFile);
 				retorno =0;
 			}
-
 		}
 
 		fclose(pFile);
@@ -369,4 +357,5 @@ int controller_maxId(LinkedList* pArrayListEmployee, int* id)
 
 	return retorno;
 }
+
 

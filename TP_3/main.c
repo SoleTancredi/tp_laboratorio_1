@@ -23,6 +23,8 @@ int main()
 {
     LinkedList* employeeList = ll_newLinkedList();
     int option;
+    int flagCargaTxt=0;
+    int flagCargaBin=0;
 
 	 do
 	 {
@@ -44,36 +46,48 @@ int main()
 			case 1:
 			    if(controller_loadFromText("data.csv", employeeList) == 0)
 			    {
+			    	flagCargaTxt = 1;
 			    	printf("\n »» CARGA DE DATOS EXITOSA ");
 			    }
 			    else
 			    {
 			    	printf("\n »» No se han cargado los datos.");
 			    }
+			    systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 2:
-				if(controller_loadFromBinary("data.csv", employeeList) == 0)
+				if(controller_loadFromBinary("dataPipi.csv", employeeList) == 0)
 				{
+					flagCargaBin = 1;
 					printf("\n »» CARGA DE DATOS EXITOSA ");
 				}
 				else
 				{
 					printf("\n »» No se han cargado los datos.");
 				}
-
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 3:
-				if(controller_addEmployee(employeeList) == 0)
+				if(flagCargaTxt == 1)
 				{
-					printf("\n »» CARGA DE DATOS EXITOSA ");
+					if(controller_addEmployee(employeeList) == 0)
+					{
+						printf("\n »» CARGA DE DATOS EXITOSA ");
+					}
+					else
+					{
+						printf("\n »» No se pudo dar de alta");
+					}8
+
 				}
 				else
 				{
 					printf("\n »» No se dio de alta ningun empleado.");
 				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 4:
-				if(controller_editEmployee(employeeList) == 0)
+				if(flagCargaTxt == 1 && controller_editEmployee(employeeList) == 0)
 				{
 					printf("\n »» MODIFICACION EXITOSA ");
 				}
@@ -81,30 +95,89 @@ int main()
 				{
 					printf("\n »» No se modifico ningun empleado.");
 				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 5:
-				if(controller_removeEmployee(employeeList) == 0)
+				if(flagCargaTxt == 1)
 				{
-					printf("\n »» ELIMINACION EXITOSA ");
+					if(controller_removeEmployee(employeeList) == 0)
+					{
+						printf("\n »» ELIMINACION EXITOSA ");
+					}
+					else
+					{
+						printf("\n »» No se ha eliminado ningun empleado.");
+					}
 				}
 				else
 				{
-					printf("\n »» No se ha eliminado ningun empleado.");
+					printf("\n »» No existen datos cargados.");
 				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 6:
-				controller_ListEmployee(employeeList);
+				if(flagCargaTxt == 1)
+				{
+					if(controller_ListEmployee(employeeList) != 0)
+					{
+						printf("\n »» No se ha podido mostrar el listado.");
+					}
+				}
+				else
+				{
+					printf("\n »» No existen datos cargados.");
+				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 7:
-				controller_sortEmployee(employeeList);
+				if(flagCargaTxt == 1)
+				{
+	             	if(controller_sortEmployee(employeeList) != 0)
+	             	{
+	             		printf("\n »» No se pudo realizar el ordenamiento.");
+	             	}
+				}
+				else
+				{
+					printf("\n »» No existen datos cargados.");
+				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 8:
-				if(controller_saveAsText("data.csv", employeeList) == 0)
+				if(flagCargaTxt == 1)
 				{
-					printf("\n »» SE HA GUARDADO CORRECTAMENTE EL ARCHIVO.");
+					if(controller_saveAsText("data.csv", employeeList) == 0)
+					{
+						printf("\n »» EL ARCHIVO SE GUARDO EXITOSAMENTE.");
+					}
+					else
+					{
+						printf("\n »» No se pudo guardar el archivo en modo texto.");
+					}
 				}
+				else
+				{
+					printf("\n »» No existen datos cargados.");
+				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 9:
+				if(flagCargaBin == 1)
+				{
+					if(controller_saveAsBinary("dataPipi.csv", employeeList) == 0)
+					{
+						 printf("\n »» EL ARCHIVO SE GUARDO EXITOSAMENTE.");
+					}
+					else
+					{
+						printf("\n »» No se pudo guardar el archivo en modo texto.");
+					}
+				}
+				else
+				{
+					printf("\n »» No existen datos cargados.");
+				}
+				systemPause("\n »»»» Presione enter para continuar...");
 				break;
 			case 10:
 				printf("\n »»» FIN DEL PROGRAMA ««« ");

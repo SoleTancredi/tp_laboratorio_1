@@ -637,5 +637,17 @@ int utn_telephoneNumber(char* string, char* mensaje, char* mensajeError, int tam
 	return retorno;
 }
 
+int systemPause(char* message)
+{
+	int ret=-1;
+	if(message!=NULL)
+	{
+		fflush(stdin);
+		printf("\n%s",message);
+		getchar();
+		ret=0;
+	}
+	return ret;
+}
 
 
