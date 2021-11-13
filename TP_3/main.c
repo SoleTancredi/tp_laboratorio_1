@@ -48,7 +48,9 @@ int main()
 				 controller_addEmployee(pipiList);
 
 				   controller_ListEmployee(pipiList);
-				   ll_sort(pipiList, employee_sortHours,0);
+				//   controller_editEmployee(pipiList);
+				   controller_sortEmployee(pipiList);
+				  // ll_sort(pipiList, employee_sortHours,0);
 				   printf("-------------------------------------------------");
 				   controller_ListEmployee(pipiList);
 			}

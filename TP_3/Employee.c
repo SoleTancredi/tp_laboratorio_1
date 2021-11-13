@@ -482,6 +482,40 @@ int employee_sortNames(void* thisOne, void* thisTwo)
 	return retorno;
 }
 
+int employee_menuSortStandard()
+{
+	int eleccion;
+
+	printf("\n\t\t >> MENU DE ORDENAMIENTO <<\n");
+	if(utn_getNumber(&eleccion, "\n »»» ORDENAR POR CRITERIO: \n"
+				"\n[1] Alfabetico."
+				"\n[2] Horas Trabajadas."
+				"\n[3] Salario."
+				"\n[4] Salir.\n"
+				"\n »»» INGRESE UNA OPCION: "
+				, "\n × ERROR. ", 1, 4, 1) == 0)
+		{
+			printf("\n »» Usted ha elegido la opcion nº %d \n", eleccion);
+		}
+
+	return eleccion;
+}
+
+int employee_menuSortWay()
+{
+	int opcion;
+
+	if(utn_getNumber(&opcion, "\n »»» ORDENAR DE FORMA:\n"
+			"\n[1] Ascendente."
+			"\n[2] Descendente"
+			"\n »»» INGRESE UNA OPCION: ","\n × ERROR.",1 , 2, 1) == 0)
+	{
+		printf("\n » Usted ha elegido al opcion nº %d \n", opcion);
+	}
+
+	return opcion;
+}
+
 
 
 

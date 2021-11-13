@@ -3,6 +3,7 @@
 
 #include "Controller.h"
 #include "Employee.h"
+#include "parser.h"
 #include "BibliotecaUtn2021.h"
 
 
@@ -141,11 +142,8 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 			{
 				printf("\n ×× EL ID INGRESADO ES INEXISTENTE. ");
 			}
-
 		}
-
 	}
-
 	return retorno;
 }
 
@@ -162,7 +160,6 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
 	int id;
 	int idIngresado;
 	Employee* pEmpleado;
-
 
 	if(pArrayListEmployee != NULL)
 	{
@@ -219,7 +216,44 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+	int retorno = -1;
+	int orden;
+	int criterio;
+
+	if(pArrayListEmployee != NULL)
+	{
+		criterio = employee_menuSortStandard();
+		if(criterio != 4)
+		{
+		   orden = employee_menuSortWay();
+			if(orden == 2)
+			{
+				orden = 0;
+			}
+		}
+
+			switch(criterio)
+			{
+				case 1:
+					ll_sort(pArrayListEmployee, employee_sortNames, orden);
+					retorno = 0;
+					break;
+				case 2:
+					ll_sort(pArrayListEmployee, employee_sortHours, orden);
+					retorno = 0;
+					break;
+				case 3:
+					ll_sort(pArrayListEmployee, employee_sortSalary, orden);
+					retorno = 0;
+					break;
+				case 4:
+					printf("\n »» Saliendo...");
+					retorno = 0;
+					break;
+			}
+	}
+
+    return retorno;
 }
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
  *

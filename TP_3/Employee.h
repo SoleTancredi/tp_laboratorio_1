@@ -40,4 +40,8 @@ int employee_register(Employee* this, int id);
 int employee_sortSalary(void* thisOne, void* thisTwo);
 int employee_sortHours(void* thisOne, void* thisTwo);
 int employee_sortNames(void* thisOne, void* thisTwo);
+
+int employee_menuSortStandard();
+int employee_menuSortWay();
+
 #endif // employee_H_INCLUDED

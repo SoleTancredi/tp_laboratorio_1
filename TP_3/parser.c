@@ -19,7 +19,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	char strSueldo[50];
 	int leidos;
 	Employee* pNewEmpleado;
-
+//sacar encabezados con fscanf
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{
 		do
