@@ -185,6 +185,7 @@ int employee_showList(LinkedList* this)
 
 	if(this != NULL)
 	{
+		employee_posterList();
 		for(int i = 0; i < ll_len(this); i++)
 		{
 			pAuxEmployee = ll_get(this, i);
@@ -319,6 +320,14 @@ int employee_modify(Employee* this)
 	}
 
 	return retorno;
+}
+
+void employee_posterList()
+{
+	printf("\n\t  ## LISTADO DE EMPLEADOS ##");
+	printf("\n__________________________________________________________\n");
+	printf("\n  %-6s     %-14s%-14s    %-20s \n","ID ","NOMBRE ","HORAS TRAB. ","SUELDO ");
+	printf("__________________________________________________________\n");
 }
 
 void employee_posterSelected()

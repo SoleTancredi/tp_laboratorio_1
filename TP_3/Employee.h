@@ -33,6 +33,7 @@ int employee_modify(Employee* this);
 void employee_posterSelected();
 void employee_posterModified();
 void employee_posterPreview();
+void employee_posterList();
 
 int employee_add(Employee* this, int* id, char* nombre, int horasTrabajadas, int sueldo);
 int employee_register(Employee* this, int id);

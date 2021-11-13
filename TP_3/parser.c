@@ -19,9 +19,11 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 	char strSueldo[50];
 	int leidos;
 	Employee* pNewEmpleado;
-//sacar encabezados con fscanf
+
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{
+		fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n", strId, strNombre,strHorasTrabajadas,strSueldo);
+
 		do
 		{
 			leidos = fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n", strId, strNombre,strHorasTrabajadas,strSueldo);
@@ -55,9 +57,11 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 	int retorno = -1;
 	int leidos;
 	Employee* pNewEmployee;
+	Employee bufferEmployee;
 
 	if(pFile != NULL && pArrayListEmployee != NULL)
 	{
+		fread(&bufferEmployee, sizeof(Employee),1, pFile);
 		do
 		{
 			pNewEmployee = employee_new();
@@ -75,6 +79,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 				retorno = -1;
 				break;
 			}
+
 
 		}while(!feof(pFile));
 
