@@ -255,7 +255,7 @@ int employee_modify(Employee* this)
 				   break;
 			   case 2:
 				   if(utn_getNumber(&bufferEmployee.horasTrabajadas, "\n »» INGRESE LAS HORAS TRABAJADAS: ",
-						   "\n × ERROR. REINGRESE.", 1 , 50, 1) == 0)
+						   "\n × ERROR. REINGRESE.", 1 , 10000, 1) == 0)
 				   {
 					   printf("\n » Horas trabajadas ingresadas: [%d]\n", bufferEmployee.horasTrabajadas);
 					   if(utn_getNumber(&rta2,"\n » CONFIRMAR MODIFICACION ? "
@@ -277,7 +277,7 @@ int employee_modify(Employee* this)
 				   break;
 			   case 3:
 				   if(utn_getNumber(&bufferEmployee.sueldo, "\n »» INGRESE EL SUELDO: ",
-				  						   "\n × ERROR. REINGRESE.", 25000 , 180000, 1) == 0)
+				  						   "\n × ERROR. REINGRESE.", 0 , 200000, 1) == 0)
 				   {
 					   printf("\n » Sueldo ingresado: [%d]\n", bufferEmployee.sueldo);
 					   if(utn_getNumber(&rta3,"\n » CONFIRMAR MODIFICACION ? "
@@ -379,11 +379,11 @@ int employee_register(Employee* this, int id)
 	if(this != NULL)
 	{
 		if(utn_nombreOapellido(bufferEmployee.nombre, "\n »» INGRESE EL NOMBRE: ",
-				"\n × ERROR. REINGRESE.", TAM_NAME, 1) == 0
-				&& utn_getNumber(&bufferEmployee.horasTrabajadas,"\n »» INGRESE LA HORAS TRABAJADAS: ",
-				"\n × ERROR. REINGRESE. ",1, 60, 1) == 0
-				&& utn_getNumber(&bufferEmployee.sueldo,"\n »» INGRESE EL SUELDO: ",
-				"\n × ERROR. REINGRESE. " , 100, 1000000, 1) == 0)
+		"\n × ERROR. REINGRESE.", TAM_NAME, 1) == 0
+		&& utn_getNumber(&bufferEmployee.horasTrabajadas,"\n »» INGRESE LA HORAS TRABAJADAS: ",
+		"\n × ERROR. REINGRESE. ",1, 60, 1) == 0
+		&& utn_getNumber(&bufferEmployee.sueldo,"\n »» INGRESE EL SUELDO: ",
+		"\n × ERROR. REINGRESE. " , 100, 1000000, 1) == 0)
 		{
 			employee_setId(&bufferEmployee, id);
 			employee_posterPreview();
@@ -396,14 +396,11 @@ int employee_register(Employee* this, int id)
 				{
 					if(employee_add(this, &id, bufferEmployee.nombre, bufferEmployee.horasTrabajadas, bufferEmployee.sueldo) == 0)
 					{
-						printf("\n »»» CARGA COMPLETA «««");
 						retorno = 0;
 					}
 				}
 			}
-
 		}
-
 	}
 
 	return retorno;

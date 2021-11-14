@@ -45,19 +45,21 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
 	int retorno = -1;
 
-	FILE* pFile;
-
-	pFile = fopen(path, "r");
+	FILE* pFile  = fopen(path, "r");
 
 	if(pFile != NULL)
 	{
 		if(parser_EmployeeFromBinary(pFile, pArrayListEmployee) == 0)
 		{
 			retorno = 0;
+			fclose(pFile);
+		}
+		else
+		{
+			puts("\n fallo parser");
 		}
 	}
 
-	fclose(pFile);
 
     return retorno;
 }
@@ -85,10 +87,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     		if(employee_register(pNewEmployee, id) == 0)
     		{
     			ll_add(pArrayListEmployee, pNewEmployee);
-    		}
-    		else
-    		{
-    			printf("\n »» NO SE DIO DE ALTA NINGUN EMPLEADO.");
+    			retorno = 0;
     		}
 
     	}
@@ -117,7 +116,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 	{
 		controller_ListEmployee(pArrayListEmployee);
 		if(utn_getNumber(&idIngresado, "\n »» SELECCIONE UN EMPLEADO MEDIANTE ID:  "
-						,"\n × ERROR. REINGRESE EL ID.\n",0,10000, 1) == 0)
+						,"\n × ERROR. REINGRESE EL ID.\n",0,2000, 1) == 0)
 		{
 			for(int i = 0; i < ll_len(pArrayListEmployee); i++)
 			{
@@ -235,7 +234,10 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			switch(criterio)
 			{
 				case 1:
-					ll_sort(pArrayListEmployee, employee_sortNames, orden);
+					if(ll_sort(pArrayListEmployee, employee_sortNames, orden) == 0)
+					{
+						printf("\n TODO BIEN");
+					}
 					retorno = 0;
 					break;
 				case 2:

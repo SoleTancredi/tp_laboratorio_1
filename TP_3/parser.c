@@ -72,9 +72,8 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
 			}
 
 		}while(!feof(pFile));
-
 	}
-	printf("\n cont :%d",cont);
+	printf("\nDatos leidos :%d",cont);
 
     return retorno;
 }
