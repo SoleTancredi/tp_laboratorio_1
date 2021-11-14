@@ -180,7 +180,7 @@ void employee_showUnit(Employee* this)
 
 int employee_showList(LinkedList* this)
 {
-	int retorno = -1;
+	int retorno = -1,cont=0;
 	Employee* pAuxEmployee;
 
 	if(this != NULL)
@@ -190,8 +190,10 @@ int employee_showList(LinkedList* this)
 		{
 			pAuxEmployee = ll_get(this, i);
 			employee_showUnit(pAuxEmployee);
+			cont++;
 			retorno = 0;
 		}
+		printf("\n\t\t\t Cantidad de empleados: %d",cont);
 	}
 
 	return retorno;
@@ -406,6 +408,33 @@ int employee_register(Employee* this, int id)
 	return retorno;
 }
 
+int employee_sortId(void* thisOne, void* thisTwo)
+{
+	int retorno = 0;
+	Employee* pBuffer1;
+	Employee* pBuffer2;
+
+	pBuffer1 = thisOne;
+	pBuffer2 = thisTwo;
+
+	if(thisOne != NULL && thisTwo != NULL)
+	{
+		if((*pBuffer1).id < (*pBuffer2).id)
+		{
+			retorno = -1;
+		}
+		else
+		{
+			if((*pBuffer1).id > (*pBuffer2).id)
+			{
+				retorno = 1;
+			}
+		}
+	}
+
+	return retorno;
+}
+
 int employee_sortSalary(void* thisOne, void* thisTwo)
 {
 	int retorno = 0;
@@ -494,12 +523,13 @@ int employee_menuSortStandard()
 
 	printf("\n\t\t >> MENU DE ORDENAMIENTO <<\n");
 	if(utn_getNumber(&eleccion, "\n »»» ORDENAR POR CRITERIO: \n"
-				"\n[1] Alfabetico."
-				"\n[2] Horas Trabajadas."
-				"\n[3] Salario."
-				"\n[4] Salir.\n"
+				"\n[1] Id."
+				"\n[2] Alfabetico."
+				"\n[3] Horas Trabajadas."
+				"\n[4] Salario."
+				"\n\n[5] Salir.\n"
 				"\n »»» INGRESE UNA OPCION: "
-				, "\n × ERROR. ", 1, 4, 1) == 0)
+				, "\n × ERROR. ", 1, 5, 1) == 0)
 		{
 			printf("\n »» Usted ha elegido la opcion nº %d \n", eleccion);
 		}
@@ -516,7 +546,7 @@ int employee_menuSortWay()
 			"\n[2] Descendente"
 			"\n »»» INGRESE UNA OPCION: ","\n × ERROR.",1 , 2, 1) == 0)
 	{
-		printf("\n » Usted ha elegido al opcion nº %d \n", opcion);
+		printf("\n »» Aguarde un momento... \n");
 	}
 
 	return opcion;

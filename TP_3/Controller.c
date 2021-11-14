@@ -234,21 +234,22 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
 			switch(criterio)
 			{
 				case 1:
-					if(ll_sort(pArrayListEmployee, employee_sortNames, orden) == 0)
-					{
-						printf("\n TODO BIEN");
-					}
+					ll_sort(pArrayListEmployee, employee_sortId, orden);
 					retorno = 0;
 					break;
 				case 2:
-					ll_sort(pArrayListEmployee, employee_sortHours, orden);
+					ll_sort(pArrayListEmployee, employee_sortNames, orden);
 					retorno = 0;
 					break;
 				case 3:
-					ll_sort(pArrayListEmployee, employee_sortSalary, orden);
+					ll_sort(pArrayListEmployee, employee_sortHours, orden);
 					retorno = 0;
 					break;
 				case 4:
+					ll_sort(pArrayListEmployee, employee_sortSalary, orden);
+					retorno = 0;
+					break;
+				case 5:
 					printf("\n »» Saliendo...");
 					retorno = 0;
 					break;

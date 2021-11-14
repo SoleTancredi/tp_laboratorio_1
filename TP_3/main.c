@@ -24,21 +24,8 @@ int main()
 {
     LinkedList* employeeList = ll_newLinkedList();
     int option;
-    char nombre[123];
-    int medidaNombre;
-    int sizeNombre;
-    int flagCargaTxt=0;
-    int flagCargaBin=0;
+    int flagCarga = 0;
 
- /*   if(utn_getCharacter(nombre,"\nINGRESE","\nERROR", 1) == 0)
-    {
-    	printf("\n El nombre es: %s", nombre);
-    	medidaNombre = strlen(nombre);
-    	printf("\n meidda nombre strle %d", medidaNombre);
-    	sizeNombre = sizeof(nombre);
-    	printf("\n SIZE nombre %d", sizeNombre);
-
-    }*/
 	 do
 	 {
 		 printf("\n\t\t »»»»» MENU PRINCIPAL «««««\n");
@@ -58,31 +45,47 @@ int main()
 			switch(option)
 			{
 				case 1:
-					if(controller_loadFromText("data.csv", employeeList) == 0)
+					if(flagCarga == 0)
 					{
-						flagCargaTxt = 1;
-						printf("\n »» CARGA DE DATOS EXITOSA ");
+						if(controller_loadFromText("data.csv", employeeList) == 0)
+						{
+							flagCarga = 1;
+							printf("\n »» CARGA DE DATOS EXITOSA ");
+						}
+						else
+						{
+							printf("\n X No se han cargado los datos.");
+						}
 					}
 					else
 					{
-						printf("\n X No se han cargado los datos.");
+					    printf("\n >> Ya se cargaron los datos");
 					}
+
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 2:
-					if(controller_loadFromBinary("dataPipi.bin", employeeList) == 0)
+					if(flagCarga == 0)
 					{
-						flagCargaBin = 1;
-						printf("\n »» CARGA DE DATOS EXITOSA ");
+						if(controller_loadFromBinary("dataBin.bin", employeeList) == 0)
+						{
+							flagCarga = 1;
+							printf("\n »» CARGA DE DATOS EXITOSA ");
+						}
+						else
+						{
+							printf("\n X  No se encontro archivo binario .");
+						}
 					}
 					else
 					{
-						printf("\n X  No se encontro archivo binario .");
+						 printf("\n >> Ya se cargaron los datos");
 					}
+
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 3:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_addEmployee(employeeList) == 0)
 						{
@@ -92,7 +95,6 @@ int main()
 						{
 							printf("\n X No se dio de alta.");
 						}
-
 					}
 					else
 					{
@@ -101,7 +103,7 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 4:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_editEmployee(employeeList) == 0)
 						{
@@ -119,7 +121,7 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 5:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_removeEmployee(employeeList) == 0)
 						{
@@ -137,7 +139,7 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 6:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_ListEmployee(employeeList) != 0)
 						{
@@ -151,7 +153,7 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 7:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_sortEmployee(employeeList) == 0)
 						{
@@ -170,7 +172,7 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 8:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
 						if(controller_saveAsText("data.csv", employeeList) == 0)
 						{
@@ -188,9 +190,9 @@ int main()
 					systemPause("\n »»»» Presione enter para continuar...");
 					break;
 				case 9:
-					if(flagCargaTxt == 1 || flagCargaBin == 1)
+					if(flagCarga == 1)
 					{
-						if(controller_saveAsBinary("dataPipi.bin", employeeList) == 0)
+						if(controller_saveAsBinary("dataBin.bin", employeeList) == 0)
 						{
 							 printf("\n »» EL ARCHIVO SE GUARDO EXITOSAMENTE.");
 						}

@@ -38,6 +38,7 @@ void employee_posterList();
 int employee_add(Employee* this, int* id, char* nombre, int horasTrabajadas, int sueldo);
 int employee_register(Employee* this, int id);
 
+int employee_sortId(void* thisOne, void* thisTwo);
 int employee_sortSalary(void* thisOne, void* thisTwo);
 int employee_sortHours(void* thisOne, void* thisTwo);
 int employee_sortNames(void* thisOne, void* thisTwo);
