@@ -400,7 +400,7 @@ int ll_push(LinkedList* this, int index, void* pElement)
 void* ll_pop(LinkedList* this,int index)
 {
     void* returnAux = NULL;
-    Node* pNodeDelete;
+
 
     if(this != NULL && index > -1 && index < ll_len(this))
     {
